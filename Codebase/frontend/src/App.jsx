@@ -10,8 +10,6 @@ import BookDetail from "./components/BookDetail";
 import UserProvider from "./components/UserProvider";
 import GuestCheckout from "./components/GuestCheckout";
 import UserProfile from "./components/UserProfile";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 import CollectionDetail from "./components/CollectionDetail";
 import Cart from "./components/Cart";
 import UserCheckout from "./components/UserCheckout";
@@ -50,14 +48,7 @@ function App() {
               <Route path="/signin" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/bookdetail/:id" element={<BookDetail />} />
-              <Route
-                path="/guestcheckout"
-                element={
-                  <Elements stripe={stripePromise}>
-                    <GuestCheckout />
-                  </Elements>
-                }
-              />
+              <Route path="/guestcheckout" element={<GuestCheckout />} />
               <Route path="/userprofile" element={<UserProfile />} />
               <Route path="/usercheckout" element={<UserCheckout />} />
               <Route path="/collections/:id" element={<CollectionDetail />} />
