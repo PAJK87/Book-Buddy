@@ -1,3 +1,3 @@
 # 2024S-Code-Avengers (Book Buddy)
 
-We plan to create a website named **bookbuddy** that can function as a book e-commerce site with a robust recommendation engine that can help users find new authors and books they otherwise would have trouble finding. The ML Model will take different diversity metrics into account and be able to find new authors, books, or genres of writing that the user will be interested in. The site itself will contain a modern UI with wish list features and full e-commerce functionality.
+This repo is my fork of the capstone project I completed for my Masters in Computer Science. I was the lead developer in a team of 8 and we preacticed Agile software development that split our semester into 4 different sprints. I created this for to continue fine-tuning and working on the project after the semester was completed. 
