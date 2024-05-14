@@ -1,18 +1,16 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC0VBzlAXNixGhEHT36vz3Tmj4wnRN-3WE",
-  authDomain: "bookbuddy-c0df9.firebaseapp.com",
-  projectId: "bookbuddy-c0df9",
-  storageBucket: "bookbuddy-c0df9.appspot.com",
-  messagingSenderId: "288055428438",
-  appId: "1:288055428438:web:20cf1812bbe95c28f202f7",
+  apiKey: "AIzaSyBtuU6Y1EkMh2P_4kmnrtihhXSbltI3e9s",
+  authDomain: "bookbuddy-48294.firebaseapp.com",
+  projectId: "bookbuddy-48294",
+  storageBucket: "bookbuddy-48294.appspot.com",
+  messagingSenderId: "288802447531",
+  appId: "1:288802447531:web:0df4a16f037e9eb684d7ee"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
 
-export { auth, db };
+export { auth };

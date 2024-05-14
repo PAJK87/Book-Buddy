@@ -47,7 +47,7 @@ const Cart = () => {
   };
 
   const handleCheckout = () => {
-    navigate('/usercheckout', { state: { cart } });
+    navigate('/userCheckout', { state: { cart } });
   };
 
   if (loading) return <p>Loading...</p>;

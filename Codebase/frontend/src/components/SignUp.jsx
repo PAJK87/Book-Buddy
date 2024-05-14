@@ -81,7 +81,7 @@ function SignUp() {
 
       toast.success("Sign up successful!");
       await handleSignUpSuccess(userData);
-      navigate("/userprofile");
+      navigate("/userProfile");
     } catch (error) {
       console.error("Error registering user:", error);
       if (error.code === "auth/email-already-in-use") {
@@ -258,7 +258,7 @@ function SignUp() {
           <p className="text-center text-gray-600 text-base mt-6">
             Already have an account?{" "}
             <Link
-              to="/signin"
+              to="/signIn"
               className="text-orange-500 hover:text-orange-600 font-bold"
             >
               Sign In

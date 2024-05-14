@@ -23,7 +23,7 @@ function BookGrid() {
       {books.map((book) => (
         <Link
           key={book.id}
-          to={`/bookdetail/${book.id}`}
+          to={`/bookDetail/${book.id}`}
           className="bg-white shadow-md rounded-lg overflow-hidden cursor-pointer transition-transform duration-300 ease-in-out hover:transform hover:scale-105"
         >
           <div className="relative">

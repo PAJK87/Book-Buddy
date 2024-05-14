@@ -43,13 +43,13 @@ function App() {
                   </>
                 }
               />
-              <Route path="/signin" element={<SignIn />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/bookdetail/:id" element={<BookDetail />} />
-              <Route path="/guestcheckout" element={<GuestCheckout />} />
-              <Route path="/userprofile" element={<UserProfile />} />
-              <Route path="/usercheckout" element={<UserCheckout />} />
-              <Route path="/collections/:id" element={<CollectionDetail />} />
+              <Route path="/signIn" element={<SignIn />} />
+              <Route path="/signUp" element={<SignUp />} />
+              <Route path="/bookDetail/:id" element={<BookDetail />} />
+              <Route path="/guestCheckout" element={<GuestCheckout />} />
+              <Route path="/userProfile" element={<UserProfile />} />
+              <Route path="/userCheckout" element={<UserCheckout />} />
+              <Route path="/collectionDetail/:id" element={<CollectionDetail />} />
               <Route path="/cart/:userId" element={<Cart />} />
             </Routes>
           </main>

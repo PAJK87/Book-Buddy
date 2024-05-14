@@ -99,7 +99,7 @@ function UserProfile() {
             {collections.map((collection) => (
               <li key={collection.id} className="mb-4">
                 <Link
-                  to={`/collections/${collection.id}`}
+                  to={`/collectionDetail/${collection.id}`}
                   className="text-blue-500 hover:text-blue-600"
                 >
                   {collection.collectionName}
