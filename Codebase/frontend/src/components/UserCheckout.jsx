@@ -57,11 +57,14 @@ const UserCheckout = () => {
       });
 
       if (response.ok) {
+        toast.success("Order submitted!");
         const data = await response.json();
         console.log('Checkout successful:', data);
-        setSubmitSuccess(true); // Set the success state
+        setSubmitSuccess(true);
       } else {
+        toast.error("Order not submitted");
         console.error('Failed to complete checkout');
+        throw new Error(response.statusText);
       }
     } catch (error) {
       console.error('Error during checkout:', error);
@@ -148,6 +151,7 @@ const UserCheckout = () => {
           Complete Checkout
         </button>
       )}
+      <ToastContainer />
     </div>
   );
 };

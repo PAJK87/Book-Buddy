@@ -14,8 +14,6 @@ import CollectionDetail from "./components/CollectionDetail";
 import Cart from "./components/Cart";
 import UserCheckout from "./components/UserCheckout";
 
-const stripePromise = loadStripe("your_stripe_public_key");
-
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 

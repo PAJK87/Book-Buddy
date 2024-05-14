@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function CollectionDetail() {
   const { id } = useParams();
@@ -7,7 +9,7 @@ function CollectionDetail() {
   const [newCollectionName, setNewCollectionName] = useState("");
 
   useEffect(() => {
-    const fetchCollection = async () => {
+    const fetchUserCollections = async () => {
       try {
         const response = await fetch(`http://localhost:8080/collections/${id}`);
         if (!response.ok) {
@@ -19,10 +21,10 @@ function CollectionDetail() {
         console.error("Error fetching collection:", error);
       }
     };
-    fetchCollection();
+    fetchUserCollections();
   }, [id]);
 
-  const handleRemoveBook = async (bookId) => {
+  const handleRemoveBook = async (bookId, title) => {
     try {
       const response = await fetch(
         `http://localhost:8080/collections/${id}/remove_book/${bookId}`,
@@ -30,11 +32,15 @@ function CollectionDetail() {
           method: "PUT",
         },
       );
-      if (!response.ok) {
+      if (response.ok){
+        toast.success(`${title} was removed successfully`);
+        const updatedCollection = await response.json();
+        setCollection(updatedCollection);
+      }
+      else {
+        toast.error(`${title} not removed successfully`)
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const updatedCollection = await response.json();
-      setCollection(updatedCollection);
     } catch (error) {
       console.error("Error deleting book:", error);
     }
@@ -46,15 +52,19 @@ function CollectionDetail() {
         `http://localhost:8080/collections/${id}/rename/${newCollectionName}`,
         {
           method: "PUT",
-        },
+        }
       );
-      if (!response.ok) {
+    
+      if (response.ok) {
+        const updatedCollection = await response.json();
+        setCollection(updatedCollection);
+        toast.success("Collection renamed successfully");
+      } else {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const updatedCollection = await response.json();
-      setCollection(updatedCollection);
     } catch (error) {
       console.error("Error renaming collection:", error);
+      toast.error("Failed to rename collection");
     }
   };
 
@@ -106,7 +116,7 @@ function CollectionDetail() {
               <p className="text-gray-600">Description: {book.description}</p>
               <button
                 className="mt-2 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
-                onClick={() => handleRemoveBook(book.id)}
+                onClick={() => handleRemoveBook(book.id, book.title)}
               >
                 Remove Book
               </button>
@@ -114,6 +124,7 @@ function CollectionDetail() {
           ))}
         </ul>
       </div>
+      <ToastContainer />
     </div>
   );
 }

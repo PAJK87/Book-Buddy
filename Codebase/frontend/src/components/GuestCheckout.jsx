@@ -38,10 +38,12 @@ function GuestCheckout() {
       });
 
       if (response.ok) {
+        toast.success("Order submitted!")
         const data = await response.json();
         console.log("Guest checkout data saved:", data);
         setSubmitSuccess(true);
       } else {
+        toast.error("Order not submitted")
         console.error("Failed to save guest checkout data");
       }
     } catch (error) {
@@ -152,6 +154,7 @@ function GuestCheckout() {
           </button>
         </form>
       )}
+      <ToastContainer />
     </div>
   );
 }
