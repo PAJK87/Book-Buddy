@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { UserContext } from "./UserProvider";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function BookDetail() {
   const { id } = useParams();
@@ -48,7 +50,10 @@ function BookDetail() {
         `http://localhost:8080/cart/add-item/${user.cartId}/${id}`,
         { method: "POST" },
       );
-      if (!response.ok) {
+      if (response.ok) {
+        toast.success("Book added to cart");
+      }else{
+        toast.error("Error adding item to cart");
         throw new Error("Failed to add item to cart");
       }
     } catch (error) {
@@ -62,10 +67,13 @@ function BookDetail() {
         `http://localhost:8080/collections/${user.id}/${collectionName}/add_book/${id}`,
         { method: "PUT" },
       );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if(response.ok){
+        console.log("Added to collection:", book.title);
+        toast.success("Book added to collection");
+      }else{
+        toast.error("Error adding book to collection");
+        throw new Error(`HTTP error! status: ${response.status}`)
       }
-      console.log("Added to collection:", book.title);
     } catch (error) {
       console.error("Error adding to collection:", error);
     }
@@ -168,7 +176,9 @@ function BookDetail() {
               </Link>
             ))}
           </div>
+          <ToastContainer />
         </div>
+        
       )}
     </div>
   );

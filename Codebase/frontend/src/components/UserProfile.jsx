@@ -3,6 +3,8 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { UserContext } from "./UserContext";
 import { auth } from "../firebase";
 import { signOut } from "firebase/auth";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function UserProfile() {
   const navigate = useNavigate();
@@ -138,6 +140,7 @@ function UserProfile() {
           </Link>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

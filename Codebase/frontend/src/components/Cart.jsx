@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "./UserContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
   const [cart, setCart] = useState(null);
@@ -32,8 +34,10 @@ const Cart = () => {
           'Content-Type': 'application/json'
         }
       });
-      if (!response.ok) {
-        throw new Error('Failed to remove item from cart');
+      if (response.ok) {
+        toast.success("Item removed from cart");
+      }else{
+        throw new Error(`Failed to remove item from cart, HTTP Status: ${response.statusText}`);
       }
       const data = await response.json();
       setCart(data);
@@ -68,6 +72,7 @@ const Cart = () => {
       >
         Proceed to Checkout
       </button>
+      <ToastContainer />
     </div>
   );
 };
