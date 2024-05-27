@@ -62,7 +62,7 @@ public class BookCollectionService {
 
         for (Book book : bookCollection.getBooks()) {
             if (bookToAdd.getId().equals(book.getId())) {
-                throw new BookAlreadyInCollectionException();
+                throw new BookAlreadyInCollectionException(book.getTitle());
             }
         }
 
