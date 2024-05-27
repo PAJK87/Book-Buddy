@@ -74,11 +74,4 @@ public class GlobalExceptionAdvice {
         return ex.getMessage();
     }
 
-    @ResponseBody
-    @ExceptionHandler(BookAlreadyInCollectionException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    String bookAlreadyInCollectionHandler(UserNotFoundException ex) {
-        return ex.getMessage();
-    }
-
 }

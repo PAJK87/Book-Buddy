@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -30,15 +30,14 @@ function CollectionDetail() {
         `http://localhost:8080/collections/${id}/remove_book/${bookId}`,
         {
           method: "PUT",
-        },
+        }
       );
-      if (response.ok){
+      if (response.ok) {
         toast.success(`${title} was removed successfully`);
         const updatedCollection = await response.json();
         setCollection(updatedCollection);
-      }
-      else {
-        toast.error(`${title} not removed successfully`)
+      } else {
+        toast.error(`${title} not removed successfully`);
         throw new Error(`HTTP error! status: ${response.status}`);
       }
     } catch (error) {
@@ -54,7 +53,7 @@ function CollectionDetail() {
           method: "PUT",
         }
       );
-    
+
       if (response.ok) {
         const updatedCollection = await response.json();
         setCollection(updatedCollection);
@@ -76,7 +75,7 @@ function CollectionDetail() {
     <div className="container mx-auto px-4 py-8">
       <div className="bg-white shadow-md rounded-lg p-8">
         <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
-          Collection Details
+          {collection.collectionName}
         </h2>
         <div className="mb-6">
           <label
@@ -101,26 +100,24 @@ function CollectionDetail() {
             Rename
           </button>
         </div>
-        <h3 className="text-xl font-bold mb-4 text-gray-800">
-          Collection Name: {collection.collectionName}
-        </h3>
-        <h3 className="text-xl font-bold mb-4 text-gray-800">
-          Books in Collection
-        </h3>
         <ul>
           {collection.booksInCollection.map((book) => (
-            <li key={book.id} className="border-b border-gray-200 py-4">
-              <h4 className="text-lg font-bold text-gray-800">{book.title}</h4>
-              <p className="text-gray-600">Author: {book.author}</p>
-              <p className="text-gray-600">Price: ${book.price}</p>
-              <p className="text-gray-600">Description: {book.description}</p>
+            <div className="flex justify-between items-center border-b border-gray-200 py-4">
+              <Link key={book.id} to={`/bookDetail/${book.id}`}>
+                <div>
+                  <h4 className="text-lg font-bold text-gray-800 hover:text-red-900">
+                    {book.title}
+                  </h4>
+                  <p className="text-gray-600">Author: {book.author}</p>
+                </div>
+              </Link>
               <button
-                className="mt-2 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+                className="bg-red-500 hover:bg-red-600 text-white py-1 px-4 rounded-lg focus:outline-none focus:shadow-outline"
                 onClick={() => handleRemoveBook(book.id, book.title)}
               >
                 Remove Book
               </button>
-            </li>
+            </div>
           ))}
         </ul>
       </div>
