@@ -1,4 +1,4 @@
-package com.bookbuddy.bookbuddy.Controllers;
+package com.bookbuddy.bookbuddy.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bookbuddy.bookbuddy.Entities.UserCheckout;
-import com.bookbuddy.bookbuddy.ServiceClasses.UserCheckoutService;
+import com.bookbuddy.bookbuddy.entities.UserCheckout;
+import com.bookbuddy.bookbuddy.services.UserCheckoutService;
 
 @RestController
 @RequestMapping("/user-checkout")

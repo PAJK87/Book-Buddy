@@ -1,4 +1,4 @@
-package com.bookbuddy.bookbuddy.Entities;
+package com.bookbuddy.bookbuddy.entities;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -25,7 +25,7 @@ public class CartDTO {
     @Schema(name = "totalPrice", description = "Total price of all items in the cart", example = "100.00")
     private BigDecimal totalPrice;
 
-    public static CartDTO fromEntity(Cart cart){
+    public static CartDTO fromEntity(Cart cart) {
         CartDTO cartDTO = new CartDTO();
         cartDTO.setCartId(cart.getCartId());
         cartDTO.setUserId(cart.getUser().getId());
@@ -65,5 +65,5 @@ public class CartDTO {
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
-    
+
 }

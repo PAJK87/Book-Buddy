@@ -1,4 +1,4 @@
-package com.bookbuddy.bookbuddy.Entities;
+package com.bookbuddy.bookbuddy.entities;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -74,9 +74,9 @@ public class CreateUserDTO {
 
     public List<String> getGenresList() {
         return Arrays.stream(genres.split(","))
-                     .map(String::trim)
-                     .filter(g -> !g.isEmpty())
-                     .collect(Collectors.toList());
+                .map(String::trim)
+                .filter(g -> !g.isEmpty())
+                .collect(Collectors.toList());
     }
 
     public void setGenres(String genres) {

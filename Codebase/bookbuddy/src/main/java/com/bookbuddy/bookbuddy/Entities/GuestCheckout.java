@@ -1,23 +1,31 @@
-package com.bookbuddy.bookbuddy.Entities;
+package com.bookbuddy.bookbuddy.entities;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
+@Schema(name = "GuestCheckout", description = "Contains all checkout details for a guest")
 public class GuestCheckout {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
+
     private String email;
+
     private String address;
+
     private String cardNumber;
+
     private String cardExpiry;
-    private String cardCVV;
+
     private String price;
+
     private String bookName;
 
     public Long getId() {
@@ -66,14 +74,6 @@ public class GuestCheckout {
 
     public void setCardExpiry(String cardExpiry) {
         this.cardExpiry = cardExpiry;
-    }
-
-    public String getCardCVV() {
-        return cardCVV;
-    }
-
-    public void setCardCVV(String cardCVV) {
-        this.cardCVV = cardCVV;
     }
 
     public String getPrice() {

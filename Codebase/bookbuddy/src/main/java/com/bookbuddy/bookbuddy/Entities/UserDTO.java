@@ -1,4 +1,4 @@
-package com.bookbuddy.bookbuddy.Entities;
+package com.bookbuddy.bookbuddy.entities;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -38,7 +38,7 @@ public class UserDTO {
     @Schema(description = "List of genres that the user is interested in")
     private Set<GenreDTO> genres;
 
-    public static UserDTO fromEntity(User user){
+    public static UserDTO fromEntity(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
         userDTO.setFirstName(user.getFirstName());
@@ -47,14 +47,14 @@ public class UserDTO {
         userDTO.setDateOfBirth(user.getDateOfBirth());
         userDTO.setCartId(user.getCart().getCartId());
         userDTO.setDescription(user.getUserDescription());
-                Set<GenreDTO> genreDTOs = user.getGenres().stream()
-            .map(genre -> {
-                GenreDTO genreDTO = new GenreDTO();
-                genreDTO.setId(genre.getId());
-                genreDTO.setName(genre.getName());
-                return genreDTO;
-            })
-            .collect(Collectors.toSet());
+        Set<GenreDTO> genreDTOs = user.getGenres().stream()
+                .map(genre -> {
+                    GenreDTO genreDTO = new GenreDTO();
+                    genreDTO.setId(genre.getId());
+                    genreDTO.setName(genre.getName());
+                    return genreDTO;
+                })
+                .collect(Collectors.toSet());
         userDTO.setGenres(genreDTOs);
         return userDTO;
     }

@@ -1,4 +1,4 @@
-package com.bookbuddy.bookbuddy.Entities;
+package com.bookbuddy.bookbuddy.entities;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -32,9 +32,6 @@ public class UserCheckout {
     private String cardNumber;
 
     private String cardExpiry;
-
-    private String cardCVV;
-
 
     public BigDecimal getTotalPrice() {
         return totalPrice;
@@ -90,13 +87,5 @@ public class UserCheckout {
 
     public void setCardExpiry(String cardExpiry) {
         this.cardExpiry = cardExpiry;
-    }
-
-    public String getCardCVV() {
-        return cardCVV;
-    }
-
-    public void setCardCVV(String cardCVV) {
-        this.cardCVV = cardCVV;
     }
 }

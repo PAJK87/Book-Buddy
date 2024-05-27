@@ -1,4 +1,4 @@
-package com.bookbuddy.bookbuddy.Controllers;
+package com.bookbuddy.bookbuddy.controllers;
 
 import java.util.List;
 
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bookbuddy.bookbuddy.Entities.CreateUserDTO;
-import com.bookbuddy.bookbuddy.Entities.UserDTO;
-import com.bookbuddy.bookbuddy.ServiceClasses.UserService;
+import com.bookbuddy.bookbuddy.entities.CreateUserDTO;
+import com.bookbuddy.bookbuddy.entities.UserDTO;
+import com.bookbuddy.bookbuddy.services.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -38,63 +38,55 @@ public class UserController {
     @Autowired
     UserService userService;
 
-
     @GetMapping("/all")
-    @Operation(summary="Admin route to list all users")
-    public ResponseEntity<List<UserDTO>> all(){
+    @Operation(summary = "Admin route to list all users")
+    public ResponseEntity<List<UserDTO>> all() {
         List<UserDTO> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
     @PostMapping("/new")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "201", description = "User added successfully"),
+            @ApiResponse(responseCode = "201", description = "User added successfully"),
     })
-    @Operation(summary="Add a new user to the database")
+    @Operation(summary = "Add a new user to the database")
     public ResponseEntity<UserDTO> newUser(
-        @RequestBody CreateUserDTO newUser) 
-    {
-    	UserDTO newUserDTO = userService.addNewUser(newUser);
+            @RequestBody CreateUserDTO newUser) {
+        UserDTO newUserDTO = userService.addNewUser(newUser);
         return ResponseEntity.status(HttpStatus.CREATED).body(newUserDTO);
     }
 
     @GetMapping("/{userId}")
-    @Operation(summary="Get user details by id")
+    @Operation(summary = "Get user details by id")
     public ResponseEntity<UserDTO> findUser(
-        @Parameter(description="Unique ID corresponding to a user", example="1") @PathVariable Long userId) 
-    {
+            @Parameter(description = "Unique ID corresponding to a user", example = "1") @PathVariable Long userId) {
         UserDTO user = userService.getUserDetails(userId);
         return ResponseEntity.ok(user);
     }
 
     @GetMapping("/email")
-    @Operation(summary="Get user details by email")
+    @Operation(summary = "Get user details by email")
     public ResponseEntity<UserDTO> findUserByEmail(
-        @RequestParam String email) 
-    {
+            @RequestParam String email) {
         UserDTO user = userService.getUserDetailsWithEmail(email);
         return ResponseEntity.ok(user);
     }
 
     @PutMapping("/{userId}")
-    @Operation(summary="Update user details by id")
+    @Operation(summary = "Update user details by id")
     public ResponseEntity<UserDTO> updateUser(
-        @Parameter(name="userId", description="Unique ID corresponding to a user", example="1") @PathVariable Long userId, 
-        @RequestBody UserDTO updatedUserDetails) 
-    {
+            @Parameter(name = "userId", description = "Unique ID corresponding to a user", example = "1") @PathVariable Long userId,
+            @RequestBody UserDTO updatedUserDetails) {
         UserDTO updatedUser = userService.updateUser(userId, updatedUserDetails);
         return ResponseEntity.ok(updatedUser);
     }
 
     @DeleteMapping("/{userId}")
-    @Operation(summary="Delete user by id")
+    @Operation(summary = "Delete user by id")
     public ResponseEntity<String> deleteUser(
-        @Parameter(name="userId", description="Unique ID corresponding to a user", example="1") @PathVariable Long userId)
-    {
+            @Parameter(name = "userId", description = "Unique ID corresponding to a user", example = "1") @PathVariable Long userId) {
         userService.deleteUser(userId);
         return ResponseEntity.ok("User with id: " + userId + " was deleted");
     }
 
 }
-
-

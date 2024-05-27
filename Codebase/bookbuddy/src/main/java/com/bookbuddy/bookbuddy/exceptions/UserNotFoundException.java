@@ -1,4 +1,4 @@
-package com.bookbuddy.bookbuddy.CreatedExceptions;
+package com.bookbuddy.bookbuddy.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
 
@@ -9,7 +9,5 @@ public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String string) {
         super(string);
     }
-
-
 
 }

@@ -1,4 +1,4 @@
-package com.bookbuddy.bookbuddy.Entities;
+package com.bookbuddy.bookbuddy.entities;
 
 import java.math.BigDecimal;
 
@@ -27,24 +27,22 @@ public class CartItem {
 
 	@ManyToOne
 	@JsonIgnore
-	@Schema(description = "id of the cart",example = "000056")
+	@Schema(description = "id of the cart", example = "000056")
 	@JoinColumn(name = "cart_id")
 	private Cart cart;
-	
 
 	@ManyToOne
-	@Schema(description = "id of the book",example = "00034")
+	@Schema(description = "id of the book", example = "00034")
 	@JoinColumn(name = "book_id")
 	private Book book;
 
-	@Schema(description = "price of the item",example = "$10")
+	@Schema(description = "price of the item", example = "$10")
 	@Column(name = "item_price")
 	private BigDecimal itemPrice;
 
 	@ManyToOne
-    @JoinColumn(name = "user_checkout_id")
-    private UserCheckout userCheckout;
-	
+	@JoinColumn(name = "user_checkout_id")
+	private UserCheckout userCheckout;
 
 	public Long getCartItemId() {
 		return cartItemId;
@@ -96,15 +94,12 @@ public class CartItem {
 
 	}
 
-    public UserCheckout getUserCheckout() {
-        return userCheckout;
-    }
+	public UserCheckout getUserCheckout() {
+		return userCheckout;
+	}
 
-    public void setUserCheckout(UserCheckout userCheckout) {
-        this.userCheckout = userCheckout;
-    }
-	
-	
-
+	public void setUserCheckout(UserCheckout userCheckout) {
+		this.userCheckout = userCheckout;
+	}
 
 }

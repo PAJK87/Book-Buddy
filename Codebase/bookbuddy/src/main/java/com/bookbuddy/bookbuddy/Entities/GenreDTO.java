@@ -1,7 +1,7 @@
-package com.bookbuddy.bookbuddy.Entities;
+package com.bookbuddy.bookbuddy.entities;
 
 public class GenreDTO {
-    
+
     private Long id;
     private String name;
 

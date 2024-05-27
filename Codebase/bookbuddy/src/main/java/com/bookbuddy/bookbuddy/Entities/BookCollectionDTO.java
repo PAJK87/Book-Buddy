@@ -1,4 +1,4 @@
-package com.bookbuddy.bookbuddy.Entities;
+package com.bookbuddy.bookbuddy.entities;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class BookCollectionDTO {
     @Schema(description = "List of books in the collection")
     private List<Book> booksInCollection;
 
-    public static BookCollectionDTO fromEntity(BookCollection collection){
+    public static BookCollectionDTO fromEntity(BookCollection collection) {
         BookCollectionDTO collectionDTO = new BookCollectionDTO();
         collectionDTO.setId(collection.getId());
         collectionDTO.setCollectionName(collection.getCollectionName());
@@ -49,5 +49,5 @@ public class BookCollectionDTO {
     public void setBooksInCollection(List<Book> booksInCollection) {
         this.booksInCollection = booksInCollection;
     }
-    
+
 }
