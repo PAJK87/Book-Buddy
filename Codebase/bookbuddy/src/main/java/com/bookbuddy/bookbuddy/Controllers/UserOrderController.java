@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookbuddy.bookbuddy.entities.OrderDTO;
-import com.bookbuddy.bookbuddy.services.OrderService;
+import com.bookbuddy.bookbuddy.services.UserOrderService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -20,11 +20,11 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 public class UserOrderController {
 
     @Autowired
-    OrderService orderService;
+    UserOrderService userOrderService;
 
     @PostMapping()
     public ResponseEntity<OrderDTO> saveOrderDetails(@PathVariable Long cartId, @RequestBody Long paymentIntentId) {
-        OrderDTO newOrder = orderService.saveOrderDetails(cartId, paymentIntentId);
+        OrderDTO newOrder = userOrderService.saveOrderDetails(cartId, paymentIntentId);
         return ResponseEntity.status(HttpStatus.CREATED).body(newOrder);
     }
 

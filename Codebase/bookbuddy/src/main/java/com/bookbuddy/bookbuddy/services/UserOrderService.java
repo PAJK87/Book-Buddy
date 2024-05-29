@@ -14,23 +14,23 @@ import com.bookbuddy.bookbuddy.entities.UserOrder;
 import com.bookbuddy.bookbuddy.exceptions.CartNotFoundException;
 import com.bookbuddy.bookbuddy.exceptions.UserNotFoundException;
 import com.bookbuddy.bookbuddy.repositories.CartRepository;
-import com.bookbuddy.bookbuddy.repositories.OrderRepository;
+import com.bookbuddy.bookbuddy.repositories.UserOrderRepository;
 import com.bookbuddy.bookbuddy.repositories.UserRepository;
 
-public class OrderService {
+public class UserOrderService {
 
     @Autowired
     CartRepository cartRepository;
 
     @Autowired
-    OrderRepository orderRepository;
+    UserOrderRepository userOrderRepository;
 
     @Autowired
     UserRepository userRepository;
 
     public OrderDTO saveOrderDetails(Long cartId, Long paymentIntentId) {
         UserOrder newOrder = new UserOrder();
-        orderRepository.save(newOrder);
+        userOrderRepository.save(newOrder);
         Cart orderCart = cartRepository.findById(cartId).orElseThrow(() -> new CartNotFoundException(cartId));
         newOrder.setUser(orderCart.getUser());
         newOrder.setPaymentIntentId(paymentIntentId);
@@ -39,7 +39,7 @@ public class OrderService {
             OrderItem newItem = new OrderItem(newOrder, item.getBook(), item.getItemPrice());
             newOrder.getItemsInOrder().add(newItem);
         }
-        orderRepository.save(newOrder);
+        userOrderRepository.save(newOrder);
         clearCart(cartId);
         return OrderDTO.fromEntity(newOrder);
     }
@@ -57,7 +57,7 @@ public class OrderService {
     public List<UserOrder> getUserOrders(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
         List<UserOrder> userOrders;
-        userOrders = orderRepository.findByUser(user);
+        userOrders = userOrderRepository.findByUser(user);
         return userOrders;
     }
 
