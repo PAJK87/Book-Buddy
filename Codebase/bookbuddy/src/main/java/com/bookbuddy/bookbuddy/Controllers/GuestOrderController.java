@@ -9,21 +9,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bookbuddy.bookbuddy.entities.UserCheckout;
-import com.bookbuddy.bookbuddy.services.UserCheckoutService;
+import com.bookbuddy.bookbuddy.entities.GuestOrder;
+import com.bookbuddy.bookbuddy.repositories.GuestOrderRepository;
 
 @RestController
-@RequestMapping("/user-checkout")
+@RequestMapping("/guest-order")
 @CrossOrigin("*")
-public class UserCheckoutController {
+public class GuestOrderController {
 
     @Autowired
-    UserCheckoutService userCheckoutService;
+    GuestOrderRepository guestOrderRepository;
 
     @PostMapping
-    public ResponseEntity<UserCheckout> createUserCheckout(@RequestBody UserCheckout userCheckout) {
-        UserCheckout createdUserCheckout = userCheckoutService.createUserCheckout(userCheckout);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUserCheckout);
+    public ResponseEntity<GuestOrder> saveGuestCheckout(@RequestBody GuestOrder guestCheckout) {
+        GuestOrder savedGuestCheckout = guestOrderRepository.save(guestCheckout);
+        return new ResponseEntity<>(savedGuestCheckout, HttpStatus.CREATED);
     }
-
 }

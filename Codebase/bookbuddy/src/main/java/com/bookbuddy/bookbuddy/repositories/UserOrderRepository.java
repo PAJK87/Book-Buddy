@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.bookbuddy.bookbuddy.entities.User;
 import com.bookbuddy.bookbuddy.entities.UserOrder;
 
-public interface OrderRepository extends JpaRepository<UserOrder, Long> {
+public interface UserOrderRepository extends JpaRepository<UserOrder, Long> {
 
     List<UserOrder> findByUser(User user);
 }

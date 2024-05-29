@@ -3,9 +3,9 @@ package com.bookbuddy.bookbuddy.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.bookbuddy.bookbuddy.entities.GuestCheckout;
+import com.bookbuddy.bookbuddy.entities.GuestOrder;
 
 @Repository
-public interface GuestCheckoutRepository extends JpaRepository<GuestCheckout, Long> {
+public interface GuestOrderRepository extends JpaRepository<GuestOrder, Long> {
 
 }

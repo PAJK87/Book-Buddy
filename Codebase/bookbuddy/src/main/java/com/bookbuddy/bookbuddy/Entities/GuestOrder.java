@@ -1,49 +1,39 @@
 package com.bookbuddy.bookbuddy.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Schema(name = "Order", description = "An order entity")
-@Table(name = "user_orders")
-public class UserOrder {
+@Schema(name = "Guest Order", description = "Order made by a guest")
+@Table(name = "guest_orders")
+public class GuestOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "guest_name")
+    private String guestName;
+
+    @Column(name = "guest_email")
+    private String guestEmail;
 
     @Column(name = "total_amount")
     private double totalAmount;
 
+    @Column(name = "guest_address")
+    private String guestAddress;
+
     @Column(name = "payment_id")
     private long paymentIntentId;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderItem> itemsInOrder = new ArrayList<>();
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    @Column(name = "bookId")
+    private Book book;
 
     public Long getOrderId() {
         return orderId;
@@ -51,6 +41,14 @@ public class UserOrder {
 
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
+    }
+
+    public String getGuestEmail() {
+        return guestEmail;
+    }
+
+    public void setGuestEmail(String guestEmail) {
+        this.guestEmail = guestEmail;
     }
 
     public double getTotalAmount() {
@@ -69,12 +67,27 @@ public class UserOrder {
         this.paymentIntentId = paymentIntentId;
     }
 
-    public List<OrderItem> getItemsInOrder() {
-        return itemsInOrder;
+    public Book getBook() {
+        return book;
     }
 
-    public void setItemsInOrder(List<OrderItem> itemsInOrder) {
-        this.itemsInOrder = itemsInOrder;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
+    public String getGuestAddress() {
+        return guestAddress;
+    }
+
+    public void setGuestAddress(String guestAddress) {
+        this.guestAddress = guestAddress;
+    }
+
+    public String getGuestName() {
+        return guestName;
+    }
+
+    public void setGuestName(String guestName) {
+        this.guestName = guestName;
+    }
 }
