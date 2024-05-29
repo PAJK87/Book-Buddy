@@ -40,10 +40,6 @@ public class CartItem {
 	@Column(name = "item_price")
 	private BigDecimal itemPrice;
 
-	@ManyToOne
-	@JoinColumn(name = "user_checkout_id")
-	private UserCheckout userCheckout;
-
 	public Long getCartItemId() {
 		return cartItemId;
 	}
@@ -92,14 +88,6 @@ public class CartItem {
 
 	public CartItem() {
 
-	}
-
-	public UserCheckout getUserCheckout() {
-		return userCheckout;
-	}
-
-	public void setUserCheckout(UserCheckout userCheckout) {
-		this.userCheckout = userCheckout;
 	}
 
 }
