@@ -78,6 +78,9 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Cart cart;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserOrder> orders;
+
     public Cart getCart() {
         return cart;
     }
@@ -186,5 +189,13 @@ public class User {
 
     public void setGenres(Set<Genre> genres) {
         this.genres = genres;
+    }
+
+    public List<UserOrder> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<UserOrder> orders) {
+        this.orders = orders;
     }
 }
