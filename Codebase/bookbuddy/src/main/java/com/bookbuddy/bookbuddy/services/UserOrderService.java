@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.bookbuddy.bookbuddy.entities.Cart;
 import com.bookbuddy.bookbuddy.entities.CartItem;
@@ -17,6 +18,7 @@ import com.bookbuddy.bookbuddy.repositories.CartRepository;
 import com.bookbuddy.bookbuddy.repositories.UserOrderRepository;
 import com.bookbuddy.bookbuddy.repositories.UserRepository;
 
+@Service
 public class UserOrderService {
 
     @Autowired

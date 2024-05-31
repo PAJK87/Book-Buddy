@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -32,7 +34,8 @@ public class GuestOrder {
     @Column(name = "payment_id")
     private long paymentIntentId;
 
-    @Column(name = "bookId")
+    @ManyToOne
+    @JoinColumn(name = "book_id")
     private Book book;
 
     public Long getOrderId() {
