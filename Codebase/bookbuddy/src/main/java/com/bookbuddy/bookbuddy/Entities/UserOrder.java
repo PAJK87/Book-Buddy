@@ -16,7 +16,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Schema(name = "Order", description = "An order entity")
+@Schema(name = "UserOrder", description = "An order entity for a user")
 @Table(name = "user_orders")
 public class UserOrder {
 
@@ -33,6 +33,9 @@ public class UserOrder {
 
     @Column(name = "payment_id")
     private long paymentIntentId;
+
+    @Column(name = "shipping_address")
+    private String shippingAddress;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> itemsInOrder = new ArrayList<>();
@@ -75,6 +78,14 @@ public class UserOrder {
 
     public void setItemsInOrder(List<OrderItem> itemsInOrder) {
         this.itemsInOrder = itemsInOrder;
+    }
+
+    public String getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
     }
 
 }

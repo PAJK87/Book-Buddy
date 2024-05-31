@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Schema(name = "Guest Order", description = "Order made by a guest")
+@Schema(name = "GuestOrder", description = "Order made by a guest")
 @Table(name = "guest_orders")
 public class GuestOrder {
 
@@ -29,7 +29,7 @@ public class GuestOrder {
     private double totalAmount;
 
     @Column(name = "guest_address")
-    private String guestAddress;
+    private String guestShippingAddress;
 
     @Column(name = "payment_id")
     private long paymentIntentId;
@@ -78,12 +78,12 @@ public class GuestOrder {
         this.book = book;
     }
 
-    public String getGuestAddress() {
-        return guestAddress;
+    public String getGuestShippingAddress() {
+        return guestShippingAddress;
     }
 
-    public void setGuestAddress(String guestAddress) {
-        this.guestAddress = guestAddress;
+    public void setGuestShippingAddress(String guestShippingAddress) {
+        this.guestShippingAddress = guestShippingAddress;
     }
 
     public String getGuestName() {

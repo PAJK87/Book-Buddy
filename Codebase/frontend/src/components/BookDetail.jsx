@@ -21,19 +21,25 @@ function BookDetail() {
         setBook(data);
 
         const recommendationsResponse = await fetch(
-          `http://127.0.0.1:5001/recommendations/${encodeURIComponent(data.title)}?n=4`,
+          `http://127.0.0.1:5001/recommendations/${encodeURIComponent(
+            data.title
+          )}?n=4`
         );
         const recommendationsData = await recommendationsResponse.json();
-        console.log(recommendationsData)
+        console.log(recommendationsData);
 
-        const recommendedBooksPromises = recommendationsData.map(async (recommendation) => {
-          const bookTitle = recommendation.Book;
-          console.log("Title: ", bookTitle)
-          const encodedBookTitle = encodeURIComponent(bookTitle);
-          const response = await fetch(`http://localhost:8080/books/search/${encodedBookTitle}`);
-          const bookData = await response.json();
-          return bookData;
-        });
+        const recommendedBooksPromises = recommendationsData.map(
+          async (recommendation) => {
+            const bookTitle = recommendation.Book;
+            console.log("Title: ", bookTitle);
+            const encodedBookTitle = encodeURIComponent(bookTitle);
+            const response = await fetch(
+              `http://localhost:8080/books/search/${encodedBookTitle}`
+            );
+            const bookData = await response.json();
+            return bookData;
+          }
+        );
 
         const recommendedBooks = await Promise.all(recommendedBooksPromises);
         setRecommendedBooks(recommendedBooks);
@@ -48,11 +54,11 @@ function BookDetail() {
     try {
       const response = await fetch(
         `http://localhost:8080/cart/add-item/${user.cartId}/${id}`,
-        { method: "POST" },
+        { method: "POST" }
       );
       if (response.ok) {
         toast.success("Book added to cart");
-      }else{
+      } else {
         toast.error("Error adding item to cart");
         throw new Error("Failed to add item to cart");
       }
@@ -65,14 +71,14 @@ function BookDetail() {
     try {
       const response = await fetch(
         `http://localhost:8080/collections/${user.id}/${collectionName}/add_book/${id}`,
-        { method: "PUT" },
+        { method: "PUT" }
       );
-      if(response.ok){
+      if (response.ok) {
         console.log("Added to collection:", book.title);
         toast.success("Book added to collection");
-      }else{
+      } else {
         toast.error("Error adding book to collection");
-        throw new Error(`HTTP error! status: ${response.status}`)
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
     } catch (error) {
       console.error("Error adding to collection:", error);
@@ -178,7 +184,6 @@ function BookDetail() {
           </div>
           <ToastContainer />
         </div>
-        
       )}
     </div>
   );

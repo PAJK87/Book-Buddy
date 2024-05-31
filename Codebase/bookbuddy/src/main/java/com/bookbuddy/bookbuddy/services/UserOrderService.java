@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.bookbuddy.bookbuddy.entities.Cart;
 import com.bookbuddy.bookbuddy.entities.CartItem;
-import com.bookbuddy.bookbuddy.entities.OrderDTO;
 import com.bookbuddy.bookbuddy.entities.OrderItem;
 import com.bookbuddy.bookbuddy.entities.User;
 import com.bookbuddy.bookbuddy.entities.UserOrder;
+import com.bookbuddy.bookbuddy.entities.UserOrderDTO;
 import com.bookbuddy.bookbuddy.exceptions.CartNotFoundException;
 import com.bookbuddy.bookbuddy.exceptions.UserNotFoundException;
 import com.bookbuddy.bookbuddy.repositories.CartRepository;
@@ -30,7 +30,7 @@ public class UserOrderService {
     @Autowired
     UserRepository userRepository;
 
-    public OrderDTO saveOrderDetails(Long cartId, Long paymentIntentId) {
+    public UserOrderDTO saveOrderDetails(Long cartId, Long paymentIntentId) {
         UserOrder newOrder = new UserOrder();
         userOrderRepository.save(newOrder);
         Cart orderCart = cartRepository.findById(cartId).orElseThrow(() -> new CartNotFoundException(cartId));
@@ -43,7 +43,7 @@ public class UserOrderService {
         }
         userOrderRepository.save(newOrder);
         clearCart(cartId);
-        return OrderDTO.fromEntity(newOrder);
+        return UserOrderDTO.fromEntity(newOrder);
     }
 
     public void clearCart(Long cartId) {

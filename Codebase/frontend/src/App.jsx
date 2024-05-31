@@ -13,11 +13,6 @@ import UserProfile from "./components/UserProfile";
 import CollectionDetail from "./components/CollectionDetail";
 import Cart from "./components/Cart";
 import UserCheckout from "./components/UserCheckout";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-
-const stripePromise = loadStripe('pk_test_51P0pzxBFz5sYcIhUUQfIpmiDDkvNzyNUthfJfJ9IQw3EdLXo2U3f79HKQuj7QhA3CrBpna2nIr9xSS0ESMn6uYyG00rEZuDONA');
-
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -51,14 +46,14 @@ function App() {
               <Route path="/signIn" element={<SignIn />} />
               <Route path="/signUp" element={<SignUp />} />
               <Route path="/bookDetail/:id" element={<BookDetail />} />
-              <Route path="/guestCheckout" element={<GuestCheckout />} />
               <Route path="/userProfile" element={<UserProfile />} />
-              <Route path="/userCheckout" element={<UserCheckout />} />
-              <Route path="/collectionDetail/:id" element={<CollectionDetail />} />
+              <Route
+                path="/collectionDetail/:id"
+                element={<CollectionDetail />}
+              />
               <Route path="/cart/:userId" element={<Cart />} />
-              {/* <Elements stripe={stripePromise} >
-
-              </Elements> */}
+              <Route path="/userCheckout" element={<UserCheckout />} />
+              <Route path="/guestCheckout" element={<GuestCheckout />} />
             </Routes>
           </main>
           <footer className="bg-black py-4">
