@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { UserContext } from "./UserContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function UserProfile() {
-  const navigate = useNavigate();
-  const { user, fetchUserData } = useContext(UserContext);
+export default function UserProfile() {
+  const { user } = useContext(UserContext);
   const [collections, setCollections] = useState([]);
   const [collectionName, setCollectionName] = useState("");
 
@@ -14,12 +13,12 @@ function UserProfile() {
     if (user) {
       fetchUserCollections();
     }
-  }, [user, fetchUserData]);
+  }, [user]);
 
   const fetchUserCollections = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/collections/get/${user.id}`,
+        `http://localhost:8080/collections/get/${user.id}`
       );
       const data = await response.json();
       console.log("data:", data);
@@ -37,7 +36,7 @@ function UserProfile() {
         method: "DELETE",
       });
       setCollections(
-        collections.filter((collection) => collection.id !== collectionId),
+        collections.filter((collection) => collection.id !== collectionId)
       );
     } catch (error) {
       console.error("Error deleting collection:", error);
@@ -57,7 +56,7 @@ function UserProfile() {
             userId: user.id,
             name: collectionName,
           }),
-        },
+        }
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -142,5 +141,3 @@ function UserProfile() {
     </div>
   );
 }
-
-export default UserProfile;

@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
   const [cart, setCart] = useState(null);
-  const { user, fetchUserData } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -54,7 +54,7 @@ const Cart = () => {
   };
 
   const handleCheckout = () => {
-    navigate("/userCheckout", { state: { cart } });
+    navigate("/checkout", { state: { cart } });
   };
 
   if (loading) return <p>Loading...</p>;

@@ -6,9 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 function BookDetail() {
   const { id } = useParams();
-  const { user, addToCart } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [book, setBook] = useState(null);
-  const [quantity, setQuantity] = useState(1);
   const [collectionName, setCollectionName] = useState("");
   const [recommendedBooks, setRecommendedBooks] = useState([]);
   const navigate = useNavigate();
@@ -144,7 +143,7 @@ function BookDetail() {
         ) : (
           <button
             className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4"
-            onClick={() => navigate("/guestCheckout", { state: { book } })}
+            onClick={() => navigate("/checkout", { state: { book } })}
           >
             Proceed to Guest Checkout
           </button>

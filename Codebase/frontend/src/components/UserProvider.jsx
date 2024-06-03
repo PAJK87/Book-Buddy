@@ -8,7 +8,7 @@ const UserProvider = ({ children }) => {
     try {
       console.log("email:", email);
       const response = await fetch(
-        `http://localhost:8080/users/email?email=${email}`,
+        `http://localhost:8080/users/email?email=${email}`
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -22,7 +22,9 @@ const UserProvider = ({ children }) => {
 
   const handleSignUpSuccess = async (newUserData) => {
     try {
-      const response = await fetch(`http://localhost:8080/users/email?email=${newUserData.email}`);
+      const response = await fetch(
+        `http://localhost:8080/users/email?email=${newUserData.email}`
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -33,33 +35,8 @@ const UserProvider = ({ children }) => {
     }
   };
 
-  const addToCart = async (book, quantity) => {
-    if (user) {
-      try {
-        const response = await fetch("http://localhost:8080/cart", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userId: user.id,
-            bookId: book.id,
-            quantity: quantity,
-          }),
-        });
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log("Book added to cart:", data);
-      } catch (error) {
-        console.error("Failed to add book to cart:", error);
-      }
-    }
-  };
-
   return (
-    <UserContext.Provider value={{ user, fetchUserData, addToCart, handleSignUpSuccess }}>
+    <UserContext.Provider value={{ user, fetchUserData, handleSignUpSuccess }}>
       {children}
     </UserContext.Provider>
   );

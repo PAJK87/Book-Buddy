@@ -6,11 +6,12 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
-const CheckoutForm = ({ user, cart }) => {
+const CheckoutForm = ({ user, cart, book }) => {
   const stripe = useStripe();
   const elements = useElements();
-
+  const [searchParams, setSearchParams] = useSearchParams();
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -19,9 +20,7 @@ const CheckoutForm = ({ user, cart }) => {
       return;
     }
 
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
-    );
+    const clientSecret = searchParams.get("payment_intent_client_secret");
 
     if (!clientSecret) {
       return;

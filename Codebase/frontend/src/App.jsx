@@ -8,11 +8,10 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import BookDetail from "./components/BookDetail";
 import UserProvider from "./components/UserProvider";
-import GuestCheckout from "./components/GuestCheckout";
 import UserProfile from "./components/UserProfile";
 import CollectionDetail from "./components/CollectionDetail";
 import Cart from "./components/Cart";
-import UserCheckout from "./components/UserCheckout";
+import Checkout from "./components/Checkout";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -52,8 +51,7 @@ function App() {
                 element={<CollectionDetail />}
               />
               <Route path="/cart/:userId" element={<Cart />} />
-              <Route path="/userCheckout" element={<UserCheckout />} />
-              <Route path="/guestCheckout" element={<GuestCheckout />} />
+              <Route path="/checkout" element={<Checkout />} />
             </Routes>
           </main>
           <footer className="bg-black py-4">
