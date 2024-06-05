@@ -1,7 +1,10 @@
-package com.bookbuddy.bookbuddy.entities;
+package com.bookbuddy.bookbuddy.entityDTOS;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import com.bookbuddy.bookbuddy.entities.Cart;
+import com.bookbuddy.bookbuddy.entities.CartItem;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

@@ -1,6 +1,7 @@
 package com.bookbuddy.bookbuddy.services;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import com.bookbuddy.bookbuddy.entities.CartItem;
 import com.bookbuddy.bookbuddy.entities.OrderItem;
 import com.bookbuddy.bookbuddy.entities.User;
 import com.bookbuddy.bookbuddy.entities.UserOrder;
-import com.bookbuddy.bookbuddy.entities.UserOrderDTO;
+import com.bookbuddy.bookbuddy.entityDTOS.UserOrderDTO;
 import com.bookbuddy.bookbuddy.exceptions.CartNotFoundException;
 import com.bookbuddy.bookbuddy.exceptions.UserNotFoundException;
 import com.bookbuddy.bookbuddy.repositories.CartRepository;
@@ -56,11 +57,15 @@ public class UserOrderService {
         cartRepository.save(cartToClear);
     }
 
-    public List<UserOrder> getUserOrders(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
-        List<UserOrder> userOrders;
-        userOrders = userOrderRepository.findByUser(user);
-        return userOrders;
+    public List<UserOrderDTO> getAllOrdersByUser(Long userId) {
+        User foundUser = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        List<UserOrder> userOrders = userOrderRepository.findByUser(foundUser);
+        List<UserOrderDTO> userOrderDTOs = new ArrayList<>();
+        for (UserOrder order : userOrders) {
+            UserOrderDTO orderDTO = UserOrderDTO.fromEntity(order);
+            userOrderDTOs.add(orderDTO);
+        }
+        return userOrderDTOs;
     }
 
 }

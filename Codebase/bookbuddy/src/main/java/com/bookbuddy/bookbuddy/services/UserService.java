@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bookbuddy.bookbuddy.entities.Cart;
-import com.bookbuddy.bookbuddy.entities.CreateUserDTO;
 import com.bookbuddy.bookbuddy.entities.Genre;
 import com.bookbuddy.bookbuddy.entities.User;
-import com.bookbuddy.bookbuddy.entities.UserDTO;
+import com.bookbuddy.bookbuddy.entityDTOS.CreateUserDTO;
+import com.bookbuddy.bookbuddy.entityDTOS.UserDTO;
 import com.bookbuddy.bookbuddy.exceptions.UserNotFoundException;
 import com.bookbuddy.bookbuddy.repositories.CartRepository;
 import com.bookbuddy.bookbuddy.repositories.GenreRepository;

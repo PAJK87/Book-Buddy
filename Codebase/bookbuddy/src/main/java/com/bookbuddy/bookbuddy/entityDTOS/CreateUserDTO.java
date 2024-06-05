@@ -1,4 +1,4 @@
-package com.bookbuddy.bookbuddy.entities;
+package com.bookbuddy.bookbuddy.entityDTOS;
 
 import java.time.LocalDate;
 import java.util.Arrays;

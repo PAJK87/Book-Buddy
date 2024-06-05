@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bookbuddy.bookbuddy.entities.CreateUserDTO;
-import com.bookbuddy.bookbuddy.entities.UserDTO;
+import com.bookbuddy.bookbuddy.entityDTOS.CreateUserDTO;
+import com.bookbuddy.bookbuddy.entityDTOS.UserDTO;
 import com.bookbuddy.bookbuddy.services.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;

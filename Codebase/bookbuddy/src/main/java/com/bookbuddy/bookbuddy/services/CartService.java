@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.bookbuddy.bookbuddy.entities.Book;
 import com.bookbuddy.bookbuddy.entities.Cart;
-import com.bookbuddy.bookbuddy.entities.CartDTO;
 import com.bookbuddy.bookbuddy.entities.CartItem;
 import com.bookbuddy.bookbuddy.entities.User;
+import com.bookbuddy.bookbuddy.entityDTOS.CartDTO;
 import com.bookbuddy.bookbuddy.exceptions.BookNotFoundException;
 import com.bookbuddy.bookbuddy.exceptions.CartItemNotFoundException;
 import com.bookbuddy.bookbuddy.exceptions.CartNotFoundException;

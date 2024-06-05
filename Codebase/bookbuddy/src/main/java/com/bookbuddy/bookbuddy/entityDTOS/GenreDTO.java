@@ -1,4 +1,4 @@
-package com.bookbuddy.bookbuddy.entities;
+package com.bookbuddy.bookbuddy.entityDTOS;
 
 public class GenreDTO {
 

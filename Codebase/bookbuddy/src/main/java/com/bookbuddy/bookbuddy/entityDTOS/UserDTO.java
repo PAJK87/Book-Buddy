@@ -1,8 +1,10 @@
-package com.bookbuddy.bookbuddy.entities;
+package com.bookbuddy.bookbuddy.entityDTOS;
 
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import com.bookbuddy.bookbuddy.entities.User;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

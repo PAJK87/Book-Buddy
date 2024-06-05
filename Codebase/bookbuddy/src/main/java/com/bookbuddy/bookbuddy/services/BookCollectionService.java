@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.bookbuddy.bookbuddy.entities.Book;
 import com.bookbuddy.bookbuddy.entities.BookCollection;
-import com.bookbuddy.bookbuddy.entities.BookCollectionDTO;
 import com.bookbuddy.bookbuddy.entities.User;
+import com.bookbuddy.bookbuddy.entityDTOS.BookCollectionDTO;
 import com.bookbuddy.bookbuddy.exceptions.BookAlreadyInCollectionException;
 import com.bookbuddy.bookbuddy.exceptions.BookNotFoundException;
 import com.bookbuddy.bookbuddy.exceptions.CollectionNotFoundException;

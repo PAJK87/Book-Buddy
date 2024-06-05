@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bookbuddy.bookbuddy.entities.CartDTO;
+import com.bookbuddy.bookbuddy.entityDTOS.CartDTO;
 import com.bookbuddy.bookbuddy.services.CartService;
 
 import io.swagger.v3.oas.annotations.Operation;

@@ -1,6 +1,9 @@
-package com.bookbuddy.bookbuddy.entities;
+package com.bookbuddy.bookbuddy.entityDTOS;
 
 import java.util.List;
+
+import com.bookbuddy.bookbuddy.entities.OrderItem;
+import com.bookbuddy.bookbuddy.entities.UserOrder;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
