@@ -24,9 +24,10 @@ public class GuestOrderController {
     GuestOrderRepository guestOrderRepository;
 
     @PostMapping("/create")
-    public ResponseEntity<GuestOrder> saveGuestCheckout(@RequestBody GuestOrder guestCheckout) {
+    public ResponseEntity<Long> saveGuestCheckout(@RequestBody GuestOrder guestCheckout) {
         GuestOrder savedGuestCheckout = guestOrderRepository.save(guestCheckout);
-        return new ResponseEntity<>(savedGuestCheckout, HttpStatus.CREATED);
+        Long guestOrderId = savedGuestCheckout.getOrderId();
+        return new ResponseEntity<>(guestOrderId, HttpStatus.CREATED);
     }
 
     @GetMapping()

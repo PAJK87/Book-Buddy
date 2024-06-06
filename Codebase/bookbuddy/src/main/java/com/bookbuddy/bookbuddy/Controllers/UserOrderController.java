@@ -31,10 +31,10 @@ public class UserOrderController {
     UserOrderRepository userOrderRepository;
 
     @PostMapping("/create/{cartId}")
-    public ResponseEntity<UserOrderDTO> saveOrderDetails(@PathVariable Long cartId,
+    public ResponseEntity<Long> saveOrderDetails(@PathVariable Long cartId,
             @RequestBody String paymentIntentId) {
-        UserOrderDTO newOrder = userOrderService.saveOrderDetails(cartId, paymentIntentId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newOrder);
+        Long newOrderId = userOrderService.saveOrderDetails(cartId, paymentIntentId);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newOrderId);
     }
 
     @GetMapping("/{userOrderId}")

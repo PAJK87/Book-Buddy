@@ -16,28 +16,52 @@ export default function Checkout() {
   const { cart, book } = location.state || {};
 
   const [clientSecret, setClientSecret] = useState("");
+  const [paymentIntentId, setPaymentIntentId] = useState("");
+
+  let totalAmount = user ? cart.totalAmount : book.price;
 
   useEffect(() => {
-    fetch("http://localhost.com:8080/create-payment-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: [{}] }),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Network response was not ok.");
-        }
-        return res.json();
-      })
-      .then((data) => setClientSecret(data.clientSecret))
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    let isCancelled = false;
 
-  const options = {
-    clientSecret: clientSecret,
-  };
+    const fetchData = async () => {
+      if (!clientSecret && !paymentIntentId) {
+        try {
+          const res = await fetch(
+            "http://localhost:8080/stripe/create-payment-intent",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(totalAmount),
+            }
+          );
+
+          if (!res.ok) {
+            throw new Error("Network response was not ok.");
+          }
+
+          const data = await res.json();
+
+          if (!isCancelled) {
+            console.log("Response data:", data);
+            setClientSecret(data.clientSecret);
+            setPaymentIntentId(data.paymentIntentId);
+            console.log("Client Secret:", data.clientSecret);
+            console.log("Payment Intent ID:", data.paymentIntentId);
+          }
+        } catch (error) {
+          if (!isCancelled) {
+            console.log(error);
+          }
+        }
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [clientSecret, paymentIntentId]);
 
   return (
     <div>
@@ -52,6 +76,7 @@ export default function Checkout() {
               <p>Price: {item.book.price}</p>
             </div>
           ))}
+          <h3>Order Total: {totalAmount}</h3>
         </div>
       ) : book ? (
         <div>
@@ -60,15 +85,23 @@ export default function Checkout() {
             <p>Title: {book.title}</p>
             <p>Price: {book.price}</p>
           </div>
+          <h3>Order Total: {totalAmount}</h3>
         </div>
       ) : (
         <div>
           <p>No items found for checkout.</p>
         </div>
       )}
-      <Elements options={options} stripe={stripePromise}>
-        <CheckoutForm user={user} cart={cart} />
-      </Elements>
+      {clientSecret && (
+        <Elements options={{ clientSecret }} stripe={stripePromise}>
+          <CheckoutForm
+            user={user}
+            cart={cart}
+            book={book}
+            paymentIntentId={paymentIntentId}
+          />
+        </Elements>
+      )}
     </div>
   );
 }

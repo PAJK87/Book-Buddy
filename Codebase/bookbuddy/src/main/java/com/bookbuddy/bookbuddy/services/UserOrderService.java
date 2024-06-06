@@ -31,7 +31,7 @@ public class UserOrderService {
     @Autowired
     UserRepository userRepository;
 
-    public UserOrderDTO saveOrderDetails(Long cartId, String paymentIntentId) {
+    public Long saveOrderDetails(Long cartId, String paymentIntentId) {
         UserOrder newOrder = new UserOrder();
         userOrderRepository.save(newOrder);
         Cart orderCart = cartRepository.findById(cartId).orElseThrow(() -> new CartNotFoundException(cartId));
@@ -44,7 +44,8 @@ public class UserOrderService {
         }
         userOrderRepository.save(newOrder);
         clearCart(cartId);
-        return UserOrderDTO.fromEntity(newOrder);
+        Long userOrderId = newOrder.getOrderId();
+        return userOrderId;
     }
 
     public void clearCart(Long cartId) {
