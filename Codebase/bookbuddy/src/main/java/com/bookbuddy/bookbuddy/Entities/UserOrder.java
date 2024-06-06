@@ -37,7 +37,7 @@ public class UserOrder {
     @Column(name = "shipping_address")
     private String shippingAddress;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL)
     private List<OrderItem> itemsInOrder = new ArrayList<>();
 
     public User getUser() {
