@@ -22,7 +22,7 @@ import com.stripe.param.PaymentIntentCreateParams;
 @CrossOrigin("*")
 public class StripePaymentController {
 
-    @Value("${stripe.api.key}")
+    @Value("${stripe.api-key}")
     private String stripeApiKey;
 
     @PostConstruct
