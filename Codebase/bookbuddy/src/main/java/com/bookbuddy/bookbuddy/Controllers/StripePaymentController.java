@@ -32,7 +32,7 @@ public class StripePaymentController {
 
     @PostMapping("/create-payment-intent")
     public ResponseEntity<String> createPaymentIntent(@RequestBody BigDecimal totalAmount) {
-        long totalAmountLong = totalAmount.longValue() * 100;
+        long totalAmountLong = totalAmount.multiply(new BigDecimal("100")).longValue();
         try {
             PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
                     .setAmount(totalAmountLong)
