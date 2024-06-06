@@ -35,7 +35,7 @@ public class CartService {
         Book bookToAdd = bookRepository.findById(bookId).orElseThrow(() -> new BookNotFoundException(bookId));
         Cart userCart = cartRepository.findById(cartId).orElseThrow(() -> new CartNotFoundException(cartId));
 
-        CartItem itemToAdd = new CartItem(userCart, bookToAdd, bookToAdd.getPrice());
+        CartItem itemToAdd = new CartItem(userCart.getCartId(), bookToAdd, bookToAdd.getPrice());
         userCart.getCartItems().add(itemToAdd);
         userCart.setTotalPrice(calculateTotalPrice(userCart));
         cartItemRepository.save(itemToAdd);

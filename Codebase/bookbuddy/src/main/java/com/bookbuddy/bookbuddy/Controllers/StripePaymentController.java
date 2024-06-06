@@ -49,7 +49,6 @@ public class StripePaymentController {
             String clientSecret = paymentIntent.getClientSecret();
             return ResponseEntity.ok().body("{\"clientSecret\":\"" + clientSecret + "\"}");
         } catch (StripeException e) {
-            e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

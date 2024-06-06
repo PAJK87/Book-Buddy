@@ -17,8 +17,8 @@ import jakarta.persistence.Table;
 @Table(name = "order_items")
 public class OrderItem {
 
-    public OrderItem(UserOrder order, Book book, BigDecimal itemPrice) {
-        this.order = order;
+    public OrderItem(Long orderId, Book book, BigDecimal itemPrice) {
+        this.orderId = orderId;
         this.book = book;
         this.itemPrice = itemPrice;
     }
@@ -29,10 +29,10 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderItemId;
 
-    @ManyToOne
+    @Column(name = "order_id")
     @Schema(description = "id of the order", example = "00067")
-    @JoinColumn(name = "order_id")
-    private UserOrder order;
+    @JoinColumn(name = "order_id", referencedColumnName = "order_id")
+    private Long orderId;
 
     @ManyToOne
     @Schema(description = "id of the book", example = "00089")
@@ -71,12 +71,12 @@ public class OrderItem {
         this.itemPrice = itemPrice;
     }
 
-    public UserOrder getOrder() {
-        return this.order;
+    public Long getOrderId() {
+        return this.orderId;
     }
 
-    public void setOrder(UserOrder order) {
-        this.order = order;
+    public void setOrder(Long orderId) {
+        this.orderId = orderId;
     }
 
 }

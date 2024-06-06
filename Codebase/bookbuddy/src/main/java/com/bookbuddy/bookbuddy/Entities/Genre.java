@@ -2,6 +2,7 @@ package com.bookbuddy.bookbuddy.entities;
 
 import java.util.Set;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,9 +18,11 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "genre")
     private String name;
 
     @ManyToMany(mappedBy = "genres")
+    @Column(name = "userId")
     private Set<User> users;
 
     public Long getId() {

@@ -16,16 +16,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(name = "CartDTO", description = "Data Transfer Object for Cart")
 public class CartDTO {
 
-    @Schema(name = "cartId", description = "Unique ID corresponding to a Cart", example = "1")
+    @Schema(description = "Unique ID corresponding to a Cart", example = "1")
     private Long cartId;
 
-    @Schema(name = "userId", description = "Unique ID corresponding to a User", example = "1")
+    @Schema(description = "Unique ID corresponding to a User", example = "1")
     private Long userId;
 
-    @Schema(name = "items", description = "List of items in the cart")
+    @Schema(description = "List of items in the cart")
     private List<CartItem> items;
 
-    @Schema(name = "totalPrice", description = "Total price of all items in the cart", example = "100.00")
+    @Schema(description = "Total price of all items in the cart", example = "100.00")
     private BigDecimal totalPrice;
 
     public static CartDTO fromEntity(Cart cart) {

@@ -2,8 +2,6 @@ package com.bookbuddy.bookbuddy.entities;
 
 import java.math.BigDecimal;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,11 +23,9 @@ public class CartItem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long cartItemId;
 
-	@ManyToOne
-	@JsonIgnore
 	@Schema(description = "id of the cart", example = "000056")
 	@JoinColumn(name = "cart_id")
-	private Cart cart;
+	private Long cartId;
 
 	@ManyToOne
 	@Schema(description = "id of the book", example = "00034")
@@ -48,12 +44,12 @@ public class CartItem {
 		this.cartItemId = cartItemId;
 	}
 
-	public Cart getCart() {
-		return cart;
+	public Long getCartId() {
+		return cartId;
 	}
 
-	public void setCart(Cart cart) {
-		this.cart = cart;
+	public void setCart(Long cartId) {
+		this.cartId = cartId;
 	}
 
 	public Book getBook() {
@@ -72,16 +68,16 @@ public class CartItem {
 		this.itemPrice = itemPrice;
 	}
 
-	public CartItem(Long cartItemId, Cart cart, Book book, BigDecimal itemPrice) {
+	public CartItem(Long cartItemId, Long cartId, Book book, BigDecimal itemPrice) {
 		super();
 		this.cartItemId = cartItemId;
-		this.cart = cart;
+		this.cartId = cartId;
 		this.book = book;
 		this.itemPrice = itemPrice;
 	}
 
-	public CartItem(Cart cart, Book book, BigDecimal itemPrice) {
-		this.cart = cart;
+	public CartItem(Long cartId, Book book, BigDecimal itemPrice) {
+		this.cartId = cartId;
 		this.book = book;
 		this.itemPrice = itemPrice;
 	}

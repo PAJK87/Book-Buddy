@@ -30,8 +30,9 @@ public class UserOrderController {
     @Autowired
     UserOrderRepository userOrderRepository;
 
-    @PostMapping("/create")
-    public ResponseEntity<UserOrderDTO> saveOrderDetails(@PathVariable Long cartId, @RequestBody Long paymentIntentId) {
+    @PostMapping("/create/{cartId}")
+    public ResponseEntity<UserOrderDTO> saveOrderDetails(@PathVariable Long cartId,
+            @RequestBody String paymentIntentId) {
         UserOrderDTO newOrder = userOrderService.saveOrderDetails(cartId, paymentIntentId);
         return ResponseEntity.status(HttpStatus.CREATED).body(newOrder);
     }
@@ -43,7 +44,7 @@ public class UserOrderController {
         return ResponseEntity.ok(userOrder);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all/{userId}")
     public ResponseEntity<List<UserOrderDTO>> getAllUserOrders(@PathVariable Long userId) {
         List<UserOrderDTO> listOfAllOrdersMadeByAUser = userOrderService.getAllOrdersByUser(userId);
         return ResponseEntity.ok(listOfAllOrdersMadeByAUser);

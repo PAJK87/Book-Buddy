@@ -32,7 +32,7 @@ public class UserOrder {
     private double totalAmount;
 
     @Column(name = "payment_id")
-    private long paymentIntentId;
+    private String paymentIntentId;
 
     @Column(name = "shipping_address")
     private String shippingAddress;
@@ -64,11 +64,11 @@ public class UserOrder {
         this.totalAmount = totalAmount;
     }
 
-    public long getPaymentIntentId() {
+    public String getPaymentIntentId() {
         return paymentIntentId;
     }
 
-    public void setPaymentIntentId(long paymentIntentId) {
+    public void setPaymentIntentId(String paymentIntentId) {
         this.paymentIntentId = paymentIntentId;
     }
 

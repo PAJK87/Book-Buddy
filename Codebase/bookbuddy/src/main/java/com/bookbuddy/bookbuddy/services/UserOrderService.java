@@ -31,7 +31,7 @@ public class UserOrderService {
     @Autowired
     UserRepository userRepository;
 
-    public UserOrderDTO saveOrderDetails(Long cartId, Long paymentIntentId) {
+    public UserOrderDTO saveOrderDetails(Long cartId, String paymentIntentId) {
         UserOrder newOrder = new UserOrder();
         userOrderRepository.save(newOrder);
         Cart orderCart = cartRepository.findById(cartId).orElseThrow(() -> new CartNotFoundException(cartId));
@@ -39,7 +39,7 @@ public class UserOrderService {
         newOrder.setPaymentIntentId(paymentIntentId);
         newOrder.setTotalAmount(orderCart.getTotalPrice().doubleValue());
         for (CartItem item : orderCart.getCartItems()) {
-            OrderItem newItem = new OrderItem(newOrder, item.getBook(), item.getItemPrice());
+            OrderItem newItem = new OrderItem(newOrder.getOrderId(), item.getBook(), item.getItemPrice());
             newOrder.getItemsInOrder().add(newItem);
         }
         userOrderRepository.save(newOrder);
