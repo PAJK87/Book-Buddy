@@ -8,10 +8,12 @@ export default function UserProfile() {
   const { user } = useContext(UserContext);
   const [collections, setCollections] = useState([]);
   const [collectionName, setCollectionName] = useState("");
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     if (user) {
       fetchUserCollections();
+      fetchUserOrders();
     }
   }, [user]);
 
@@ -27,6 +29,18 @@ export default function UserProfile() {
       console.error("Error fetching user collections:", error);
       console.error("Error message:", error.message);
       console.error("Error stack trace:", error.stack);
+    }
+  };
+
+  const fetchUserOrders = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/user-order/all/${user.id}`
+      );
+      const data = await response.json();
+      setOrders(data);
+    } catch (error) {
+      console.error("Error getting orders:", error);
     }
   };
 
@@ -127,6 +141,22 @@ export default function UserProfile() {
           >
             Create New Collection
           </button>
+        </div>
+        <div>
+          <h2>Orders</h2>
+          {orders.length > 0 ? (
+            <ul>
+              {orders.map((order) => (
+                <li key={order.id}>
+                  <span>{order.id}</span>
+                  <span>{order.totalAmount}</span>
+                  <Link to={`/orderDetail`} state={order}></Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No orders found.</p>
+          )}
         </div>
         <div>
           <Link

@@ -12,6 +12,8 @@ import UserProfile from "./components/UserProfile";
 import CollectionDetail from "./components/CollectionDetail";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
+import OrderDetail from "./components/OrderDetail";
+import OrderSuccess from "./components/OrderSuccess";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -52,6 +54,8 @@ function App() {
               />
               <Route path="/cart/:userId" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/orderDetail" element={<OrderDetail />} />
+              <Route path="/orderSuccess/:orderId" element={<OrderSuccess />} />
             </Routes>
           </main>
           <footer className="bg-black py-4">
