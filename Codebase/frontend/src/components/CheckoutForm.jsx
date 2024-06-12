@@ -67,7 +67,6 @@ const CheckoutForm = ({ user, cart, book, paymentIntentId }) => {
           shippingAddress: address,
         };
 
-        // Send a request to create the user order
         const userResponse = await fetch("/create-user-order", {
           method: "POST",
           headers: {
@@ -77,7 +76,6 @@ const CheckoutForm = ({ user, cart, book, paymentIntentId }) => {
         });
 
         if (userResponse.ok) {
-          // User order created successfully, get the order ID from the response
           const { orderId: userOrderId } = await userResponse.json();
           orderId = userOrderId;
         } else {

@@ -25,14 +25,17 @@ public class UserOrderDTO {
     private List<OrderItem> items;
 
     @Schema(description = "Total price of all items in the order", example = "58.23")
-    private double totalPrice;
+    private double totalOrderAmount;
+
+    private String shippingAddress;
 
     public static UserOrderDTO fromEntity(UserOrder order) {
         UserOrderDTO orderDTO = new UserOrderDTO();
         orderDTO.setOrderId(order.getOrderId());
         orderDTO.setUserId(order.getUser().getId());
         orderDTO.setItems(order.getItemsInOrder());
-        orderDTO.setTotalPrice(order.getTotalAmount());
+        orderDTO.setTotalOrderAmount(order.getTotalAmount());
+        orderDTO.setShippingAddress(order.getShippingAddress());
         return orderDTO;
     }
 
@@ -52,20 +55,28 @@ public class UserOrderDTO {
         this.userId = userId;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
     public List<OrderItem> getItems() {
         return items;
     }
 
     public void setItems(List<OrderItem> items) {
         this.items = items;
+    }
+
+    public double getTotalOrderAmount() {
+        return totalOrderAmount;
+    }
+
+    public void setTotalOrderAmount(double totalOrderAmount) {
+        this.totalOrderAmount = totalOrderAmount;
+    }
+
+    public String getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
     }
 
 }

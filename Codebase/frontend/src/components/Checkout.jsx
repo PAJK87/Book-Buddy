@@ -18,7 +18,8 @@ export default function Checkout() {
   const [clientSecret, setClientSecret] = useState("");
   const [paymentIntentId, setPaymentIntentId] = useState("");
 
-  let totalAmount = user ? cart.totalAmount : book.price;
+  let totalAmount = user ? cart.totalPrice : book.price;
+  console.log(totalAmount);
 
   useEffect(() => {
     let isCancelled = false;
