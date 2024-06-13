@@ -1,5 +1,7 @@
 package com.bookbuddy.bookbuddy.entities;
 
+import java.math.BigDecimal;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,19 +32,38 @@ public class GuestOrder {
 
     @Schema(description = "Total amount of the order", example = "19.99")
     @Column(name = "total_amount")
-    private double totalAmount;
+    private BigDecimal totalAmount;
 
     @Schema(description = "Shipping address of the guest who placed the order", example = "123 Main Street Example, Arizona 11111")
     @Column(name = "guest_address")
     private String guestShippingAddress;
 
     @Column(name = "payment_id")
-    private long paymentIntentId;
+    private String paymentIntentId;
 
     @ManyToOne
     @JoinColumn(name = "book_id")
     @Schema(description = "The id of the book that was ordered", example = "1")
     private Book book;
+
+    public GuestOrder(
+            String guestName,
+            String guestEmail,
+            BigDecimal totalAmount,
+            String guestShippingAddress,
+            String paymentIntentId,
+            Book book) {
+        this.guestEmail = guestEmail;
+        this.guestName = guestName;
+        this.totalAmount = totalAmount;
+        this.guestShippingAddress = guestShippingAddress;
+        this.paymentIntentId = paymentIntentId;
+        this.book = book;
+    }
+
+    public GuestOrder() {
+
+    }
 
     public Long getOrderId() {
         return orderId;
@@ -60,19 +81,19 @@ public class GuestOrder {
         this.guestEmail = guestEmail;
     }
 
-    public double getTotalAmount() {
+    public BigDecimal getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(double totalAmount) {
+    public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public long getPaymentIntentId() {
+    public String getPaymentIntentId() {
         return paymentIntentId;
     }
 
-    public void setPaymentIntentId(long paymentIntentId) {
+    public void setPaymentIntentId(String paymentIntentId) {
         this.paymentIntentId = paymentIntentId;
     }
 

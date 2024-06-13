@@ -16,7 +16,7 @@ public class CreateGuestOrderDTO {
     private String guestShippingAddress;
 
     @Schema(description = "Id of the payment with Stripe")
-    private Long paymentIntentId;
+    private String paymentIntentId;
 
     @Schema(description = "Total amount of the order", example = "19.99")
     private BigDecimal totalOrderAmount;
@@ -48,11 +48,11 @@ public class CreateGuestOrderDTO {
         this.guestShippingAddress = guestShippingAddress;
     }
 
-    public Long getPaymentIntentId() {
+    public String getPaymentIntentId() {
         return paymentIntentId;
     }
 
-    public void setPaymentIntentId(Long paymentIntentId) {
+    public void setPaymentIntentId(String paymentIntentId) {
         this.paymentIntentId = paymentIntentId;
     }
 

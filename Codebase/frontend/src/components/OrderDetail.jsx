@@ -11,6 +11,16 @@ export default function OrderDetail() {
     <div>
       <h3>Order Details</h3>
       <p>{order.id}</p>
+      <ul>
+        {order.items.map((item) => (
+          <li key={item.id}>
+            <span>{item.book.title}</span>
+            <span>{item.book.price}</span>
+          </li>
+        ))}
+      </ul>
+      <p>{order.shippingAddress}</p>
+      <p>{order.totalOrderAmount}</p>
     </div>
   );
 }

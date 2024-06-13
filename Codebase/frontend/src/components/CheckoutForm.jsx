@@ -13,6 +13,7 @@ const CheckoutForm = ({ user, cart, book, paymentIntentId }) => {
   const elements = useElements();
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [inputs, setInputs] = useState({});
   const [fullName, setFullName] = useState("");
   const [address, setAddress] = useState("");
   const [guestEmail, setGuestEmail] = useState("");
@@ -67,13 +68,16 @@ const CheckoutForm = ({ user, cart, book, paymentIntentId }) => {
           shippingAddress: address,
         };
 
-        const userResponse = await fetch("/create-user-order", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userOrder),
-        });
+        const userResponse = await fetch(
+          "http://localhost:8080/user-order/create-user-order",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userOrder),
+          }
+        );
 
         if (userResponse.ok) {
           const { orderId: userOrderId } = await userResponse.json();
@@ -91,13 +95,16 @@ const CheckoutForm = ({ user, cart, book, paymentIntentId }) => {
           bookId: book.id,
         };
 
-        const guestResponse = await fetch("/create-guest-order", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(guestOrder),
-        });
+        const guestResponse = await fetch(
+          "http://localhost:8080/guest-order/create-guest-order",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(guestOrder),
+          }
+        );
 
         if (guestResponse.ok) {
           const { orderId: guestOrderId } = await guestResponse.json();

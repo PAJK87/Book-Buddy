@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookbuddy.bookbuddy.entities.GuestOrder;
+import com.bookbuddy.bookbuddy.entityDTOS.CreateGuestOrderDTO;
 import com.bookbuddy.bookbuddy.exceptions.OrderNotFoundException;
 import com.bookbuddy.bookbuddy.repositories.GuestOrderRepository;
+import com.bookbuddy.bookbuddy.services.GuestOrderService;
 
 @RestController
 @RequestMapping("/guest-order")
@@ -23,10 +25,12 @@ public class GuestOrderController {
     @Autowired
     GuestOrderRepository guestOrderRepository;
 
+    @Autowired
+    GuestOrderService guestOrderService;
+
     @PostMapping("/create")
-    public ResponseEntity<Long> saveGuestCheckout(@RequestBody GuestOrder guestCheckout) {
-        GuestOrder savedGuestCheckout = guestOrderRepository.save(guestCheckout);
-        Long guestOrderId = savedGuestCheckout.getOrderId();
+    public ResponseEntity<Long> saveGuestCheckout(@RequestBody CreateGuestOrderDTO guestOrder) {
+        Long guestOrderId = guestOrderService.createNewGuestOrder(guestOrder);
         return new ResponseEntity<>(guestOrderId, HttpStatus.CREATED);
     }
 
@@ -35,6 +39,5 @@ public class GuestOrderController {
         GuestOrder guestOrder = guestOrderRepository.findById(guestOrderId)
                 .orElseThrow(() -> new OrderNotFoundException(guestOrderId));
         return ResponseEntity.ok(guestOrder);
-
     }
 }

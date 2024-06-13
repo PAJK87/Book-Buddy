@@ -20,7 +20,7 @@ import com.bookbuddy.bookbuddy.services.UserOrderService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
-@RequestMapping("user-checkout")
+@RequestMapping("user-order")
 @CrossOrigin("*")
 public class UserOrderController {
 
