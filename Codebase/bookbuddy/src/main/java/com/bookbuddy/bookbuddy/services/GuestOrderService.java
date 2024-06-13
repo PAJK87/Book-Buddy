@@ -1,6 +1,7 @@
 package com.bookbuddy.bookbuddy.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.bookbuddy.bookbuddy.entities.Book;
 import com.bookbuddy.bookbuddy.entities.GuestOrder;
@@ -9,6 +10,7 @@ import com.bookbuddy.bookbuddy.exceptions.BookNotFoundException;
 import com.bookbuddy.bookbuddy.repositories.BookRepository;
 import com.bookbuddy.bookbuddy.repositories.GuestOrderRepository;
 
+@Service
 public class GuestOrderService {
 
     @Autowired

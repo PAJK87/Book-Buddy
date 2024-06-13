@@ -1,19 +1,14 @@
 import { useLocation } from "react-router-dom";
 import { UserContext } from "./UserContext";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 export default function OrderSuccess() {
   const { user } = useContext(UserContext);
-  const [order, setOrder] = useState(null);
-  const [orderId, setOrderId] = useState(null);
   const location = useLocation();
+  const [order, setOrder] = useState(null);
+  const searchParams = new URLSearchParams(location.search);
 
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const newOrderId = searchParams.get("orderId");
-    setOrderId(newOrderId);
-    console.log(orderId);
-  }, [location.search]);
+  const orderId = searchParams.get("orderId");
 
   useEffect(() => {
     const getOrderDetails = async () => {
@@ -27,6 +22,7 @@ export default function OrderSuccess() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
+        console.log(data);
         setOrder(data);
       } catch (error) {
         console.error("Error fetching order:", error);
@@ -36,6 +32,10 @@ export default function OrderSuccess() {
       getOrderDetails();
     }
   }, [orderId, user]);
+
+  if (!order) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -64,7 +64,7 @@ export default function OrderSuccess() {
           <p>Email: {order.guestEmail}</p>
           <p>Book Ordered: {order.book.title}</p>
           <p>Order Amount: {order.totalAmount}</p>
-          <p>Shipping Address: {order.shippingAddress}</p>
+          <p>Shipping Address: {order.guestShippingAddress}</p>
         </div>
       )}
     </div>

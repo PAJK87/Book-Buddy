@@ -34,7 +34,7 @@ public class GuestOrderController {
         return new ResponseEntity<>(guestOrderId, HttpStatus.CREATED);
     }
 
-    @GetMapping()
+    @GetMapping("/{guestOrderId}")
     public ResponseEntity<GuestOrder> getGuestOrder(@PathVariable Long guestOrderId) {
         GuestOrder guestOrder = guestOrderRepository.findById(guestOrderId)
                 .orElseThrow(() -> new OrderNotFoundException(guestOrderId));

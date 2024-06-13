@@ -55,7 +55,7 @@ function App() {
               <Route path="/cart/:userId" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/orderDetail" element={<OrderDetail />} />
-              <Route path="/orderSuccess/:orderId" element={<OrderSuccess />} />
+              <Route path="/orderSuccess" element={<OrderSuccess />} />
             </Routes>
           </main>
           <footer className="bg-black py-4">

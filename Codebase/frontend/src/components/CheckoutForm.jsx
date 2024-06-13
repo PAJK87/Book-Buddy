@@ -13,7 +13,6 @@ const CheckoutForm = ({ user, cart, book, paymentIntentId }) => {
   const elements = useElements();
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [inputs, setInputs] = useState({});
   const [fullName, setFullName] = useState("");
   const [address, setAddress] = useState("");
   const [guestEmail, setGuestEmail] = useState("");
@@ -23,29 +22,18 @@ const CheckoutForm = ({ user, cart, book, paymentIntentId }) => {
       const { value } = event;
       const { name, address } = value;
 
-      const fullName = `${name.firstName || ""} ${name.lastName || ""}`;
-
       const addressString = `${address.line1 || ""}, ${address.line2 || ""}, ${
         address.city || ""
-      }, ${address.state || ""}, ${address.postalCode || ""}, ${
+      }, ${address.state || ""}, ${address.postal_code || ""}, ${
         address.country || ""
       }`;
-
-      setFullName(fullName);
+      setFullName(name);
       setAddress(addressString);
     }
   };
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-
-    if (name === "guestEmail") {
-      setGuestEmail(value);
-    } else if (name === "guestName") {
-      setGuestName(value);
-    }
-
-    setInputs((values) => ({ ...values, [name]: value }));
+    setGuestEmail(event.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -69,7 +57,7 @@ const CheckoutForm = ({ user, cart, book, paymentIntentId }) => {
         };
 
         const userResponse = await fetch(
-          "http://localhost:8080/user-order/create-user-order",
+          "http://localhost:8080/user-order/create",
           {
             method: "POST",
             headers: {
@@ -80,7 +68,7 @@ const CheckoutForm = ({ user, cart, book, paymentIntentId }) => {
         );
 
         if (userResponse.ok) {
-          const { orderId: userOrderId } = await userResponse.json();
+          const userOrderId = await userResponse.json();
           orderId = userOrderId;
         } else {
           console.error("Error creating user order:", userResponse.statusText);
@@ -94,9 +82,8 @@ const CheckoutForm = ({ user, cart, book, paymentIntentId }) => {
           totalOrderAmount: book.price,
           bookId: book.id,
         };
-
         const guestResponse = await fetch(
-          "http://localhost:8080/guest-order/create-guest-order",
+          "http://localhost:8080/guest-order/create",
           {
             method: "POST",
             headers: {
@@ -107,8 +94,9 @@ const CheckoutForm = ({ user, cart, book, paymentIntentId }) => {
         );
 
         if (guestResponse.ok) {
-          const { orderId: guestOrderId } = await guestResponse.json();
+          const guestOrderId = await guestResponse.json();
           orderId = guestOrderId;
+          console.log("Guest order created with orderId:", orderId);
         } else {
           console.error(
             "Error creating guest order:",
@@ -120,7 +108,7 @@ const CheckoutForm = ({ user, cart, book, paymentIntentId }) => {
       const { error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-          return_url: `http://localhost:5173/order-success?orderId=${orderId}`,
+          return_url: `http://localhost:5173/orderSuccess?orderId=${orderId}`,
         },
       });
 
