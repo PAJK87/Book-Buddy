@@ -10,6 +10,7 @@ function Navbar({ isAuthenticated }) {
   const handleLogout = async () => {
     try {
       await signOut(auth);
+      window.localStorage.clear();
       navigate("/signin");
       window.location.reload();
     } catch (error) {

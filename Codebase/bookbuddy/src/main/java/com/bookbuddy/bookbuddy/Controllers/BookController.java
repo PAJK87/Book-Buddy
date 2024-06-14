@@ -2,6 +2,8 @@ package com.bookbuddy.bookbuddy.controllers;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,6 +35,8 @@ public class BookController {
 
     @Autowired
     BookRepository bookRepository;
+
+    private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 
     @GetMapping("/all")
     @Operation(summary = "Get all books")

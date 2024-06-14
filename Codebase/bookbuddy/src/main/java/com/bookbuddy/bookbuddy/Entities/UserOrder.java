@@ -35,10 +35,21 @@ public class UserOrder {
     private String paymentIntentId;
 
     @Column(name = "shipping_address")
-    private String shippingAddress;
+    private String userShippingAddress;
 
     @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL)
     private List<OrderItem> itemsInOrder = new ArrayList<>();
+
+    public UserOrder(User user, String paymentIntentId, String userShippingAddress, double totalAmount) {
+        this.user = user;
+        this.paymentIntentId = paymentIntentId;
+        this.userShippingAddress = userShippingAddress;
+        this.totalAmount = totalAmount;
+    }
+
+    public UserOrder() {
+
+    }
 
     public User getUser() {
         return user;
@@ -80,12 +91,12 @@ public class UserOrder {
         this.itemsInOrder = itemsInOrder;
     }
 
-    public String getShippingAddress() {
-        return shippingAddress;
+    public String getUserShippingAddress() {
+        return userShippingAddress;
     }
 
-    public void setShippingAddress(String shippingAddress) {
-        this.shippingAddress = shippingAddress;
+    public void setUserShippingAddress(String userShippingAddress) {
+        this.userShippingAddress = userShippingAddress;
     }
 
 }

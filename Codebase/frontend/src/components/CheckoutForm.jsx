@@ -50,14 +50,13 @@ const CheckoutForm = ({ user, cart, book, paymentIntentId }) => {
 
       if (user) {
         const userOrder = {
-          userId: user.id,
-          cartId: cart.id,
+          cartId: cart.cartId,
           paymentIntentId: paymentIntentId,
-          shippingAddress: address,
+          userShippingAddress: address,
         };
-
+        console.log("UserOrder: ", userOrder);
         const userResponse = await fetch(
-          "http://localhost:8080/user-order/create",
+          `http://localhost:8080/user-order/create`,
           {
             method: "POST",
             headers: {
@@ -70,8 +69,9 @@ const CheckoutForm = ({ user, cart, book, paymentIntentId }) => {
         if (userResponse.ok) {
           const userOrderId = await userResponse.json();
           orderId = userOrderId;
+          alert("User order created with orderId: " + orderId);
         } else {
-          console.error("Error creating user order:", userResponse.statusText);
+          alert("Error creating user order:", userResponse.statusText);
         }
       } else {
         const guestOrder = {
@@ -82,6 +82,7 @@ const CheckoutForm = ({ user, cart, book, paymentIntentId }) => {
           totalOrderAmount: book.price,
           bookId: book.id,
         };
+        console.log("GuestOrder: ", guestOrder);
         const guestResponse = await fetch(
           "http://localhost:8080/guest-order/create",
           {
@@ -96,6 +97,7 @@ const CheckoutForm = ({ user, cart, book, paymentIntentId }) => {
         if (guestResponse.ok) {
           const guestOrderId = await guestResponse.json();
           orderId = guestOrderId;
+          alert("Guest order created with orderId: " + orderId);
           console.log("Guest order created with orderId:", orderId);
         } else {
           console.error(

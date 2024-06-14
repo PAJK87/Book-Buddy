@@ -23,7 +23,7 @@ export default function UserProfile() {
         `http://localhost:8080/collections/get/${user.id}`
       );
       const data = await response.json();
-      console.log("data:", data);
+      console.log("collectionData:", data);
       setCollections(data);
     } catch (error) {
       console.error("Error fetching user collections:", error);
@@ -38,6 +38,7 @@ export default function UserProfile() {
         `http://localhost:8080/user-order/all/${user.id}`
       );
       const data = await response.json();
+      console.log("orderData:", data);
       setOrders(data);
     } catch (error) {
       console.error("Error getting orders:", error);

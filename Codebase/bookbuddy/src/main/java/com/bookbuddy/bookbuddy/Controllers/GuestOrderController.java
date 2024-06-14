@@ -31,7 +31,7 @@ public class GuestOrderController {
     @PostMapping("/create")
     public ResponseEntity<Long> saveGuestCheckout(@RequestBody CreateGuestOrderDTO guestOrder) {
         Long guestOrderId = guestOrderService.createNewGuestOrder(guestOrder);
-        return new ResponseEntity<>(guestOrderId, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(guestOrderId);
     }
 
     @GetMapping("/{guestOrderId}")

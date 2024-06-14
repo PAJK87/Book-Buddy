@@ -35,7 +35,7 @@ public class UserOrderDTO {
         orderDTO.setUserId(order.getUser().getId());
         orderDTO.setItems(order.getItemsInOrder());
         orderDTO.setTotalOrderAmount(order.getTotalAmount());
-        orderDTO.setShippingAddress(order.getShippingAddress());
+        orderDTO.setShippingAddress(order.getUserShippingAddress());
         return orderDTO;
     }
 

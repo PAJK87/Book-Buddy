@@ -11,6 +11,9 @@ export default function OrderSuccess() {
   const orderId = searchParams.get("orderId");
 
   useEffect(() => {
+    console.log("User:", user);
+    console.log("Order ID:", orderId);
+
     const getOrderDetails = async () => {
       const url = user
         ? `http://localhost:8080/user-order/${orderId}`
@@ -55,7 +58,7 @@ export default function OrderSuccess() {
               </li>
             ))}
           </ul>
-          <p>Total Price: {order.totalAmount}</p>
+          <p>Total Price: {order.totalOrderAmount}</p>
           <p>Shipping Address: {order.shippingAddress}</p>
         </div>
       ) : (
