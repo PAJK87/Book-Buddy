@@ -35,37 +35,6 @@ public class UserOrderService {
     @Autowired
     UserRepository userRepository;
 
-    // public Long saveOrderDetails(CreateUserOrderDTO userOrder) {
-    // Cart orderCart = cartRepository.findById(userOrder.getCartId())
-    // .orElseThrow(() -> new CartNotFoundException(userOrder.getCartId()));
-    // UserOrder newOrder = new UserOrder(orderCart.getUser(),
-    // userOrder.getPaymentIntentId(),
-    // userOrder.getUserShippingAddress(), orderCart.getTotalPrice().doubleValue());
-    // userOrderRepository.save(newOrder);
-    // for (CartItem item : orderCart.getCartItems()) {
-    // OrderItem newItem = new OrderItem(newOrder.getOrderId(), item.getBook(),
-    // item.getItemPrice());
-    // newOrder.getItemsInOrder().add(newItem);
-    // }
-    // userOrderRepository.save(newOrder);
-    // clearCart(userOrder.getCartId());
-    // Long userOrderId = newOrder.getOrderId();
-    // return userOrderId;
-    // }
-
-    // public void clearCart(Long cartId) {
-    // Cart cartToClear = cartRepository.findById(cartId).orElseThrow(() -> new
-    // CartNotFoundException(cartId));
-
-    // Iterator<CartItem> iterator = cartToClear.getCartItems().iterator();
-    // while (iterator.hasNext()) {
-    // CartItem item = iterator.next();
-    // iterator.remove();
-    // }
-    // cartToClear.setTotalPrice(BigDecimal.ZERO);
-    // cartRepository.save(cartToClear);
-    // }
-
     public Long saveOrderDetails(CreateUserOrderDTO userOrder) {
         Logger logger = LoggerFactory.getLogger(UserOrderService.class);
         logger.info("User Order: {}", userOrder);
