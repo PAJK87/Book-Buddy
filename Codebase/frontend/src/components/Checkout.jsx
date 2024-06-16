@@ -70,10 +70,9 @@ export default function Checkout() {
       {user && cart ? (
         <div>
           <h3>Cart Items:</h3>
-          {[...cart.items].map((item) => (
+          {cart.items.map((item) => (
             <div key={item.id}>
               <p>Book: {item.book.title}</p>
-              <p>Quantity: {item.quantity}</p>
               <p>Price: {item.book.price}</p>
             </div>
           ))}

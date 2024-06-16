@@ -52,7 +52,7 @@ function App() {
                 path="/collectionDetail/:id"
                 element={<CollectionDetail />}
               />
-              <Route path="/cart/:userId" element={<Cart />} />
+              <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/orderDetail" element={<OrderDetail />} />
               <Route path="/orderSuccess" element={<OrderSuccess />} />

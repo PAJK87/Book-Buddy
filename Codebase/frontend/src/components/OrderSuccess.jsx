@@ -11,9 +11,6 @@ export default function OrderSuccess() {
   const orderId = searchParams.get("orderId");
 
   useEffect(() => {
-    console.log("User:", user);
-    console.log("Order ID:", orderId);
-
     const getOrderDetails = async () => {
       const url = user
         ? `http://localhost:8080/user-order/${orderId}`
@@ -25,7 +22,6 @@ export default function OrderSuccess() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data);
         setOrder(data);
       } catch (error) {
         console.error("Error fetching order:", error);
@@ -42,19 +38,17 @@ export default function OrderSuccess() {
 
   return (
     <div>
-      <h1>Order Complete!</h1>
+      <h1 className="text-lg">Order Complete!</h1>
+      <br />
       {user ? (
         <div>
           <p>Thank you for your order, {user.firstName}!</p>
           <p>Items in your order:</p>
           <ul>
             {order.items.map((item) => (
-              <li
-                key={item.id}
-                className="flex items-center justify-between border-b-2 border-gray-200 py-2"
-              >
-                <span className="text-lg">{item.book.title}</span>
-                <span className="text-lg">{item.book.price}</span>
+              <li key={item.orderItemId}>
+                <span>{item.book.title} </span>
+                <span>{item.book.price}</span>
               </li>
             ))}
           </ul>

@@ -61,38 +61,45 @@ const Cart = () => {
   if (!cart) return <p>Cart not found</p>;
 
   return (
-    <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-      <h2 className="text-2xl font-bold mb-4">Cart</h2>
-      <ul>
-        {cart.items.map((item) => (
-          <li
-            key={item.id}
-            className="flex items-center justify-between border-b-2 border-gray-200 py-2"
+    <div>
+      {cart.items == 0 ? (
+        <p>No items in Cart</p>
+      ) : (
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <h2 className="text-2xl font-bold mb-4">Cart</h2>
+          <ul>
+            {cart.items.map((item) => (
+              <li
+                key={item.id}
+                className="flex items-center justify-between border-b-2 border-gray-200 py-2"
+              >
+                <span className="text-lg">{item.book.title}</span>
+                <span className="text-lg">{item.book.price}</span>
+                <button
+                  onClick={() =>
+                    removeItemFromCart(cart.cartId, item.cartItemId)
+                  }
+                  className="text-sm text-red-500 hover:text-red-700"
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div className="flex justify-end">
+            <p className="text-xl pt-5 text-green-800 font-bold">
+              Cart Total: {cart.totalPrice}
+            </p>
+          </div>
+          <button
+            onClick={handleCheckout}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
           >
-            <span className="text-lg">{item.book.title}</span>
-            <span className="text-lg">{item.book.price}</span>
-            <button
-              onClick={() => removeItemFromCart(cart.cartId, item.cartItemId)}
-              className="text-sm text-red-500 hover:text-red-700"
-            >
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul>
-      <div className="flex justify-end">
-        <p className="text-xl pt-5 text-green-800 font-bold">
-          Cart Total: {cart.totalPrice}
-        </p>
-      </div>
-
-      <button
-        onClick={handleCheckout}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-      >
-        Proceed to Checkout
-      </button>
-      <ToastContainer />
+            Proceed to Checkout
+          </button>
+          <ToastContainer />
+        </div>
+      )}
     </div>
   );
 };

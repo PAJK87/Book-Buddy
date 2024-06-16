@@ -105,14 +105,14 @@ export default function UserProfile() {
             <strong>Date of Birth:</strong> {user.dateOfBirth}
           </p>
         </div>
-        <h2 className="text-2xl font-bold mb-4">Book Collections</h2>
+        <h2 className="text-xl font-bold mb-4">Book Collections</h2>
         {collections.length > 0 ? (
           <ul>
             {collections.map((collection) => (
               <li key={collection.id} className="mb-4">
                 <Link
                   to={`/collectionDetail/${collection.id}`}
-                  className="text-blue-500 hover:text-blue-600"
+                  className="text-blue-500 hover:text-blue-600 text-xl font-bold"
                 >
                   {collection.collectionName}
                 </Link>
@@ -138,20 +138,29 @@ export default function UserProfile() {
           />
           <button
             onClick={handleCreateCollection}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
+            className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
           >
             Create New Collection
           </button>
         </div>
+        <br />
         <div>
-          <h2>Orders</h2>
+          <h2 className="text-xl font-bold mb-4">Orders</h2>
           {orders.length > 0 ? (
             <ul>
               {orders.map((order) => (
-                <li key={order.id}>
-                  <span>{order.id}</span>
-                  <span>{order.totalAmount}</span>
-                  <Link to={`/orderDetail`} state={order}></Link>
+                <li
+                  key={order.orderId}
+                  className="flex items-center justify-between py-2"
+                >
+                  <Link to={`/orderDetail`} state={order}>
+                    <span className="border-b-2">
+                      Order ID: {order.orderId}{" "}
+                    </span>
+                    <span className="border-b-2">
+                      Total Amount: {order.totalOrderAmount}
+                    </span>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -161,7 +170,7 @@ export default function UserProfile() {
         </div>
         <div>
           <Link
-            to={`/cart/${user.id}`}
+            to={`/cart/`}
             className="mt-8 inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
           >
             Go to Cart
