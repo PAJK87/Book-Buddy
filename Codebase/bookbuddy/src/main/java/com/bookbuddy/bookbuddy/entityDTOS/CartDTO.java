@@ -31,7 +31,7 @@ public class CartDTO {
     public static CartDTO fromEntity(Cart cart) {
         CartDTO cartDTO = new CartDTO();
         cartDTO.setCartId(cart.getCartId());
-        cartDTO.setUserId(cart.getUser().getId());
+        cartDTO.setUserId(cart.getUser().getUserId());
         cartDTO.setItems(cart.getCartItems());
         cartDTO.setTotalPrice(cart.getTotalPrice());
         return cartDTO;

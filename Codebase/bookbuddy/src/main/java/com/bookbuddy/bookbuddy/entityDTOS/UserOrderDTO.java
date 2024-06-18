@@ -32,7 +32,7 @@ public class UserOrderDTO {
     public static UserOrderDTO fromEntity(UserOrder order) {
         UserOrderDTO orderDTO = new UserOrderDTO();
         orderDTO.setOrderId(order.getOrderId());
-        orderDTO.setUserId(order.getUser().getId());
+        orderDTO.setUserId(order.getUser().getUserId());
         orderDTO.setItems(order.getItemsInOrder());
         orderDTO.setTotalOrderAmount(order.getTotalAmount());
         orderDTO.setShippingAddress(order.getUserShippingAddress());

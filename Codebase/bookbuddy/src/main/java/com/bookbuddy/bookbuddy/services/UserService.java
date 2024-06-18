@@ -48,6 +48,8 @@ public class UserService {
             existingUser.setLastName(updatedUser.getLastName());
         if (updatedUser.getDateOfBirth() != null)
             existingUser.setDateOfBirth(updatedUser.getDateOfBirth());
+        if (updatedUser.getUserDescription() != null)
+            existingUser.setUserDescription(updatedUser.getUserDescription());
         userRepository.save(existingUser);
 
         return UserDTO.fromEntity(existingUser);
@@ -69,7 +71,7 @@ public class UserService {
         List<String> genresList = newUserDetails.getGenresList();
 
         // Associate the genres with the user
-        associateGenresWithUser(user.getId(), genresList);
+        associateGenresWithUser(user.getUserId(), genresList);
 
         return UserDTO.fromEntity(user);
     }
