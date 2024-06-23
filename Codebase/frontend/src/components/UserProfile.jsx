@@ -20,7 +20,7 @@ export default function UserProfile() {
   const fetchUserCollections = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/collections/get/${user.id}`
+        `http://localhost:8080/collections/get/${user.userId}`
       );
       const data = await response.json();
       console.log("collectionData:", data);
@@ -35,7 +35,7 @@ export default function UserProfile() {
   const fetchUserOrders = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/user-order/all/${user.id}`
+        `http://localhost:8080/user-order/all/${user.userId}`
       );
       const data = await response.json();
       console.log("orderData:", data);
@@ -61,7 +61,7 @@ export default function UserProfile() {
   const handleCreateCollection = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/collections/${user.id}/new/${collectionName}`,
+        `http://localhost:8080/collections/${user.userId}/new/${collectionName}`,
         {
           method: "POST",
           headers: {

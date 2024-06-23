@@ -35,7 +35,7 @@ public class BookCollection {
 
     @ManyToOne
     @Schema(description = "id of the user")
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "userId")
     private User user;
 
     @ManyToMany

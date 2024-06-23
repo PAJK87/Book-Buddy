@@ -24,13 +24,19 @@ sim = cosine_similarity(mtx)
 
 idx_map = pd.Series(df.index, index=df['Book'].str.lower()).drop_duplicates()
 
-@app.route('/recommendations/<book_name>', methods=['GET'])
-def recommendations(book_name):
+@app.route('/recommendations', methods=['GET'])
+def recommendations():
     try:
+        book_name = request.args.get('book', type=str)
         n = request.args.get('n', default=10, type=int)
+
+        if not book_name:
+            return jsonify({"error": "Book name is required"}), 400
+        
         book_name = book_name.lower()
         if book_name not in idx_map:
             return jsonify({"error": "Book not found"}), 404
+        
         ix = idx_map[book_name]
         scores = list(enumerate(sim[ix]))
         scores = sorted(scores, key=lambda x: x[1], reverse=True)

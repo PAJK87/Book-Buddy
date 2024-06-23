@@ -18,22 +18,20 @@ function BookDetail() {
         const response = await fetch(`http://localhost:8080/books/${id}`);
         const data = await response.json();
         setBook(data);
-
+        console.log("Title: ", data.title);
+        const encodedBookTitle = encodeURIComponent(data.title);
+        console.log("Encoded Title: ", encodedBookTitle);
         const recommendationsResponse = await fetch(
-          `http://127.0.0.1:5001/recommendations/${encodeURIComponent(
-            data.title
-          )}?n=4`
+          `http://127.0.0.1:5001/recommendations?book=${encodedBookTitle}&n=4`
         );
         const recommendationsData = await recommendationsResponse.json();
-        console.log(recommendationsData);
 
         const recommendedBooksPromises = recommendationsData.map(
           async (recommendation) => {
             const bookTitle = recommendation.Book;
-            console.log("Title: ", bookTitle);
             const encodedBookTitle = encodeURIComponent(bookTitle);
             const response = await fetch(
-              `http://localhost:8080/books/search/${encodedBookTitle}`
+              `http://localhost:8080/books/search?title=${encodedBookTitle}`
             );
             const bookData = await response.json();
             return bookData;
@@ -69,7 +67,7 @@ function BookDetail() {
   const handleAddToCollection = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/collections/${user.id}/${collectionName}/add_book/${id}`,
+        `http://localhost:8080/collections/${user.userId}/${collectionName}/add_book/${id}`,
         { method: "PUT" }
       );
       if (response.ok) {

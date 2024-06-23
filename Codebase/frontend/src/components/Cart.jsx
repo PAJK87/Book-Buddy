@@ -14,7 +14,7 @@ const Cart = () => {
     const fetchCart = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/cart/get/${user.id}`
+          `http://localhost:8080/cart/get/${user.userId}`
         );
         const data = await response.json();
         setCart(data);

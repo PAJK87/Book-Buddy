@@ -85,7 +85,6 @@ public class UserOrderService {
 
         Iterator<CartItem> iterator = cartToClear.getCartItems().iterator();
         while (iterator.hasNext()) {
-            CartItem item = iterator.next();
             iterator.remove();
         }
 

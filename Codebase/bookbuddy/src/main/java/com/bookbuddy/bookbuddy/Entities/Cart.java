@@ -28,7 +28,7 @@ public class Cart {
 
 	@OneToOne
 	@Schema(description = "Id of the user", example = "00001")
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	@JoinColumn(name = "user_id", referencedColumnName = "userId")
 	private User user;
 
 	@OneToMany(mappedBy = "cartId", cascade = CascadeType.ALL, orphanRemoval = true)

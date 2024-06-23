@@ -67,10 +67,8 @@ public class UserService {
         user.setCart(newCart);
         user = userRepository.save(user);
 
-        // Convert the comma-separated genres string to a list
         List<String> genresList = newUserDetails.getGenresList();
 
-        // Associate the genres with the user
         associateGenresWithUser(user.getUserId(), genresList);
 
         return UserDTO.fromEntity(user);

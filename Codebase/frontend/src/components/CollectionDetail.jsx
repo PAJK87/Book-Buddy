@@ -82,7 +82,7 @@ function CollectionDetail() {
             htmlFor="collectionName"
             className="block text-sm font-bold mb-2 text-gray-700"
           >
-            Name:
+            Change Collection Name:
           </label>
           <div className="mt-1 relative rounded-md shadow-sm">
             <input
@@ -102,8 +102,11 @@ function CollectionDetail() {
         </div>
         <ul>
           {collection.booksInCollection.map((book) => (
-            <div className="flex justify-between items-center border-b border-gray-200 py-4">
-              <Link key={book.id} to={`/bookDetail/${book.id}`}>
+            <div
+              key={book.id}
+              className="flex justify-between items-center border-b border-gray-200 py-4"
+            >
+              <Link to={`/bookDetail/${book.id}`}>
                 <div>
                   <h4 className="text-lg font-bold text-gray-800 hover:text-red-900">
                     {book.title}

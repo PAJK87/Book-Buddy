@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookbuddy.bookbuddy.entities.Book;
@@ -60,10 +61,10 @@ public class BookController {
         return ResponseEntity.ok(book);
     }
 
-    @GetMapping("/search/{searchTerm:.+}")
+    @GetMapping("/search")
     @Operation(summary = "Search for book by title")
     public ResponseEntity<Book> searchBook(
-            @Parameter(name = "searchTerm", description = "Title of book to search for", example = "The Great Gatsby") @PathVariable("searchTerm") String bookName) {
+            @Parameter(name = "title", description = "Title of book to search for", example = "The Great Gatsby") @RequestParam("title") String bookName) {
         Pageable pageable = PageRequest.of(0, 1);
         Page<Book> bookPage = bookRepository.findDistinctByTitle(bookName, pageable);
         Book book = bookPage.getContent().isEmpty() ? null : bookPage.getContent().get(0);
